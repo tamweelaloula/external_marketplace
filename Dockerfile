@@ -27,7 +27,7 @@ WORKDIR /app
 COPY --from=build /app ./
 
 # Expose app port
-EXPOSE 3001
+EXPOSE 3000
 
 # Start Next.js
 CMD ["npm", "start"]
