@@ -3,15 +3,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "@/i18n";
-
-interface Product {
-  id: string;
-  category: string;
-  title: string;
-  store: string;
-  price: string;
-  image: string;
-}
+import { Input } from "@/components/ui/input"
+import { Product } from "@/lib/types";
+import CustomCard from "../ui/custom-card";
+import Link from "next/link";
 
 const products: Product[] = [
   {
@@ -121,11 +116,11 @@ const FeaturedProducts = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#212044]">
-            {translate("CATEGORY_SECTION.FEATURED_PRODUCTS")}
+            {translate("TITLE.FEATURED_PRODUCTS")}
           </h2>
-          <button className="text-sm font-medium text-primary hover:underline self-start sm:self-auto">
-            {translate("CATEGORY_SECTION.SHOW_ALL")}
-          </button>
+          <Link href={"/categories/all"} className="text-sm font-medium text-primary hover:underline self-start sm:self-auto">
+            {translate("TITLE.SHOW_ALL")}
+          </Link>
         </div>
 
         {/* Category Tabs */}
@@ -140,7 +135,7 @@ const FeaturedProducts = () => {
                   : "text-gray-600 hover:text-primary"
               }`}
             >
-              {translate(`CATEGORY_SECTION.${cat}`)}
+              {translate(`TITLE.${cat}`)}
             </button>
           ))}
         </div>
@@ -148,23 +143,7 @@ const FeaturedProducts = () => {
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
           {filteredProducts.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg shadow-sm border hover:shadow-md transition p-4 cursor-pointer"
-            >
-              <div className="relative w-full h-44 sm:h-48 mb-4 flex items-center justify-center">
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  fill
-                  className="object-contain rounded-md"
-                />
-              </div>
-              <h3 className="text-sm font-medium text-[#242424] truncate">
-                {product.title}
-              </h3>
-              <p className="text-xs text-gray-500">{product.price}</p>
-            </div>
+            <CustomCard key={product.id} product={product} />
           ))}
         </div>
       </div>
