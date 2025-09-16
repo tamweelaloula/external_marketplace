@@ -11,12 +11,22 @@ const locale = {
     TITLE1: "Elevate your",
     TAMWEEL_ALOULA: "Business",
     TITLE_END: "with our marketplace  services",
-    SUBTITLE: "Lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit,",
+    SUBTITLE: "Expand reach, grow sales, and engage customers with our all-in-one marketplace",
   },
   CATEGORY_SECTION:{
-    FEATURED_PRODUCTS: "Featured Products",
-    SHOW_ALL: "Show All",
+    SEARCHBAR: "Search Here",
     TITLE: "Choose Your Category",
+  },
+  BUTTON:{
+    APPLY:"Apply",
+  },
+  TITLE:{
+    APPLY_ONLINE:"Apply Online",
+    SHOW_ALL: "Show All",
+    ALL: "All Products ",
+    FEATURED_PRODUCTS: "Featured Products",
+    RELATED_PRODUCT: "Related Products",
+    STORE:"Naqsh Store",
     CARS: "Cars",
     ELECTRONICS: "Electronics",
     EDUCATION: "Education",
@@ -31,6 +41,11 @@ const locale = {
     SUBTITLE2: "Because when we connect, we don’t just succeed — we unlock new possibilities.",
     COPYRIGHT: "©2025 Tamweel Aloula. All Right Reserved",
     BUTTON: "Become a Partner"
+  },
+  APPLIED_ONLINE:{
+    STEP3TITLE: "Nafath Verification",
+    STEP2TITLE: "Address Details",
+    STEP1TITLE: "Basic Info",
   }
 };
 

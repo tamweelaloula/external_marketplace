@@ -17,7 +17,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <TranslationContextProvider>
-          <Providers>{children}</Providers>
+          <Providers>
+            {children}
+          </Providers>
         </TranslationContextProvider>
       </body>
     </html>
