@@ -9,7 +9,7 @@ const Header = ({ onLogin }: { onLogin: () => void }) => {
 
   const navLinks = [
     { href: "/", label: translate("NAV.HOME") },
-    { href: "/products", label: translate("NAV.PRODUCTS") },
+    { href: "/categories/all", label: translate("NAV.PRODUCTS") },
     { href: "/for-merchant", label: translate("NAV.FOR_MERCHANT") },
   ];
 

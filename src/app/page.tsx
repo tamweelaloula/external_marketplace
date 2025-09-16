@@ -1,26 +1,18 @@
 "use client";
 
 import { useGetPokemonByNameQuery } from "@/lib/services/pokemon";
-import Header from "@/components/shared/Header";
 import { useTranslation } from "@/i18n";
-import { useLayoutEffect } from "react";
 import Categories from "@/components/shared/Categories";
 import FeaturedProducts from "@/components/Sections/FeaturedProducts";
 import PromoBanner from "@/components/shared/PromoBanner";
-import Footer from "@/components/Sections/Footer";
 const heroBanner = "/assets/svgs/hero-banner.png";
 
 export default function Home() {
   const { data, error, isLoading } = useGetPokemonByNameQuery("pikachu");
-  const { language, translate } = useTranslation();
-
-  useLayoutEffect(() => {
-    document.dir = language?.dir;
-  }, [language?.dir]);
+  const { translate } = useTranslation();
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onLogin={() => console.log("loged in")} />
       {/* Hero Section */}
       <section
         className="py-16  bg-cover bg-center  bg-no-repeat flex items-center relative"
@@ -71,7 +63,6 @@ export default function Home() {
       <Categories/>
       <PromoBanner/>
       <FeaturedProducts/>
-      <Footer/>
     </div>
   );
 }

@@ -120,3 +120,28 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Hide scrollbar for Chrome, Safari, Edge */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+input[type="radio"]{
+  border:2px solid white;
+  box-shadow:0 0 0 1px #F9C416;
+  appearance:none;
+  border-radius:50%;
+  width:12px;
+  height:12px;
+  background-color:#fff;
+  transition:all ease-in 0.2s;
+
+}
+input[type="radio"]:checked{
+  background-color:#F9C416;
+}
