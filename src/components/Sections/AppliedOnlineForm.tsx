@@ -4,48 +4,22 @@ import { useTranslation } from "@/i18n";
 import Image from "next/image";
 import { useState } from "react";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import FormikField from "../shared/FormikFieldInput";
-import FormikFieldSelect from "../shared/FormikFieldSelect";
-import FormikFieldRadio from "../shared/FormikFieldRadio";
+import NafathVerificationModal from "../shared/CustomModal";
+import SuccessModal from "../shared/SuccessModal";
+import BasicInfoForm from "./Forms/BasicInfoForm";
+import AddressDetailForm from "./Forms/AddressDetailForm";
+import NafathVarificationForm from "./Forms/NafathVerificationForm";
+import { validationSchemas } from "@/lib/schemas";
 
-const validationSchemas = [
-  // Step 1 validation
-  Yup.object({
-    nationalId: Yup.string()
-      .matches(/^[0-9]+$/, "Only numbers allowed")
-      .min(10, "Must be 10 digits")
-      .required("National ID is required"),
-    dob: Yup.date().required("Date of birth is required"),
-    phone: Yup.string()
-      .matches(/^966[0-9]{8,10}$/, "Must start with 966 and be 11–13 digits")
-      .required("Phone is required"),
-    email: Yup.string().email("Invalid email").nullable(),
-  }),
-  // Step 2 validation
-  Yup.object({
-    title: Yup.string().required("Title is required"),
-    nationality: Yup.string().required("Nationality is required"),
-    gender: Yup.string(),
-    region: Yup.string(),
-    city: Yup.string(),
-    maritalStatus: Yup.string(),
-    dependents: Yup.number().min(0, "Cannot be negative"),
-  }),
-  // Step 3 validation
-  Yup.object({
-    employmentType: Yup.string().required("Employment type is required"),
-    education: Yup.string().required("Education level is required"),
-    pep: Yup.string().required("PEP answer required"),
-    beneficiary: Yup.string().required("Beneficiary answer required"),
-    relationship: Yup.string().required("Relationship answer required"),
-  }),
-];
-
-export default function ApplyOnlineForm() {
+export default function ApplyOnlineForm({
+  onHandleFinalSubmit,
+}: {
+  onHandleFinalSubmit: () => void;
+}) {
   const { translate } = useTranslation();
   const [step, setStep] = useState(0);
-
+  const [showModal, setShowModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const initialValues = {
     nationalId: "",
     dob: "",
@@ -66,7 +40,9 @@ export default function ApplyOnlineForm() {
     joiningDate: "",
     pep: "",
     beneficiary: "",
+    beneficiaryName: "",
     relationship: "",
+    relationshipPosition: "",
     food: "",
     housing: "",
     domestic: "",
@@ -78,13 +54,32 @@ export default function ApplyOnlineForm() {
     total: "",
   };
 
-  const handleSubmit = (values: typeof initialValues) => {
-    console.log("values", values);
-    if (step < 2) {
-      setStep((prev) => prev + 1);
-    } else {
-      console.log("Final Submit", values);
+  const handleSubmit = async (
+    values: typeof initialValues,
+    { setSubmitting, validateForm, setTouched }: any
+  ) => {
+    const errors = await validateForm();
+    if (step === 0) {
+      setShowModal(true);
+      return;
     }
+    if (Object.keys(errors).length === 0) {
+      if (step < 2) {
+        setStep((prev) => prev + 1);
+      } else {
+        console.log("Final Submit", values);
+        setShowSuccessModal(true);
+      }
+    } else {
+      setTouched(
+        Object.keys(errors).reduce((acc: any, key) => {
+          acc[key] = true;
+          return acc;
+        }, {})
+      );
+    }
+
+    setSubmitting(false);
   };
 
   return (
@@ -95,8 +90,7 @@ export default function ApplyOnlineForm() {
           {translate("TITLE.APPLY_ONLINE")}
         </h1>
         <p className="text-gray-500 mt-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-          commodo ligula eget dolor. Aenean massa.
+          {translate("TITLE.FILL_FORM")}
         </p>
       </div>
 
@@ -117,7 +111,7 @@ export default function ApplyOnlineForm() {
             />
           </div>
           <p className="mt-2 text-sm font-medium text-gray-700 whitespace-nowrap">
-            {translate("APPLIED_ONLINE.STEP1TITLE")}
+            {translate("APPLIED_ONLINE.GENERAL_INFO")}
           </p>
         </div>
 
@@ -143,7 +137,7 @@ export default function ApplyOnlineForm() {
             />
           </div>
           <p className="mt-2 text-sm font-medium text-gray-700 whitespace-nowrap">
-            {translate("APPLIED_ONLINE.STEP2TITLE")}
+            {translate("APPLIED_ONLINE.PERSONAL_DETAILS")}
           </p>
         </div>
 
@@ -169,7 +163,7 @@ export default function ApplyOnlineForm() {
             />
           </div>
           <p className="mt-2 text-sm font-medium text-gray-700 whitespace-nowrap">
-            {translate("APPLIED_ONLINE.STEP3TITLE")}
+            {translate("APPLIED_ONLINE.ELIGIBILITY")}
           </p>
         </div>
       </div>
@@ -180,218 +174,15 @@ export default function ApplyOnlineForm() {
         validationSchema={validationSchemas[step]}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ values, isSubmitting }) => (
           <Form>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               {step === 0 ? (
-                <>
-                  <FormikField
-                    title="National ID / Iqama Number"
-                    name="nationalId"
-                    required
-                    type="text"
-                    placeholder="Enter your National ID / Iqama Number"
-                  />
-                  <FormikField
-                    title="Date of Birth"
-                    name="dob"
-                    required
-                    type="date"
-                    placeholder="Enter your National ID / Iqama Number"
-                  />
-                  <FormikField
-                    title="Phone number"
-                    name="phone"
-                    required
-                    type="tel"
-                    placeholder="9665XXXXXXXX"
-                  />
-                  <FormikField
-                    title="Email"
-                    name="email"
-                    type="email"
-                    placeholder="Email"
-                  />
-                </>
+                <BasicInfoForm />
               ) : step === 1 ? (
-                <>
-                  <FormikField
-                    title="Title"
-                    required
-                    name="title"
-                    type="text"
-                    placeholder="Enter your National ID / Iqama Number"
-                  />
-                  <FormikField
-                    title="Nationality"
-                    required
-                    name="nationality"
-                    type="text"
-                    placeholder="Enter your National ID / Iqama Number"
-                  />
-                  <FormikField
-                    title="Gender"
-                    name="gender"
-                    type="text"
-                    placeholder="Select of gender"
-                  />
-                  <FormikField
-                    title="Region"
-                    name="region"
-                    type="text"
-                    placeholder="Enter your region"
-                  />
-                  <FormikField
-                    title="City"
-                    name="city"
-                    type="text"
-                    placeholder="Enter your city"
-                  />
-                  <FormikField
-                    title="Martial Status"
-                    name="maritalStatus"
-                    type="text"
-                    placeholder="Enter your martial status"
-                  />
-                  <FormikField
-                    title="Number of dependents"
-                    name="dependents"
-                    type="text"
-                    placeholder="Enter your number of dependents"
-                  />
-                </>
+                <AddressDetailForm />
               ) : step === 2 ? (
-                <>
-                  <FormikFieldSelect
-                    value="Military"
-                    title="Employment type"
-                    required
-                    name="employmentType"
-                    options={["Military", "Government", "Private Sector"]}
-                  />
-                  <FormikFieldSelect
-                    value="Masters Degree"
-                    title="Education Level"
-                    required
-                    name="education"
-                    options={["Masters Degree", "Bachelors", "Diploma"]}
-                  />
-
-                  <FormikFieldSelect
-                    value="Rental"
-                    title="Resident Status"
-                    name="residentStatus"
-                    options={["Rental", "Owned"]}
-                  />
-
-                  <FormikFieldSelect
-                    value="Government"
-                    title="Employment Sector"
-                    name="employmentSector"
-                    options={["Private Sector", "Government"]}
-                  />
-
-                  <FormikFieldSelect
-                    value="Manager"
-                    title="Occupation"
-                    name="occupation"
-                    options={["Agent Sergeant", "Manager", "Engineer"]}
-                  />
-
-                  <FormikField
-                    title="Joining Date"
-                    name="joiningDate"
-                    type="date"
-                    placeholder="Enter your joining date"
-                  />
-
-                  <FormikFieldRadio
-                    title="Are you a politically exposed person, or do you have a
-                      relationship with a politically exposed person (PEP)?"
-                    name="pep"
-                  />
-
-                  <FormikFieldRadio
-                    title="Are you the real beneficiary from the finance?"
-                    name="beneficiary"
-                  />
-
-                  <FormikFieldRadio
-                    title="Do you have first-degree relationship with a board member,
-                      committee members or senior executives?"
-                    name="relationship"
-                  />
-
-                  <>
-                    <div></div>
-                    <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                      Financial Details
-                    </h3>
-                    <div></div>
-
-                    <FormikField
-                      title="Food Expenses"
-                      name="food"
-                      type="number"
-                      placeholder="0"
-                    />
-                    <FormikField
-                      title="Housing Expenses"
-                      name="housing"
-                      type="number"
-                      placeholder="0"
-                    />
-
-                    <FormikField
-                      title="Domestic Expenses"
-                      name="domestic"
-                      type="number"
-                      placeholder="0"
-                    />
-
-                    <FormikField
-                      title="Education Expenses"
-                      name="educationExpenses"
-                      type="number"
-                      placeholder="0"
-                    />
-
-                    <FormikField
-                      title="Health Care Expenses"
-                      name="healthcare"
-                      type="number"
-                      placeholder="0"
-                    />
-
-                    <FormikField
-                      title="Communication and Transportation Expenses"
-                      name="transport"
-                      type="number"
-                      placeholder="0"
-                    />
-
-                    <FormikField
-                      title="Insurance Expenses"
-                      name="insurance"
-                      type="number"
-                      placeholder="0"
-                    />
-
-                    <FormikField
-                      title="Any Expected future Expenses"
-                      name="future"
-                      type="number"
-                      placeholder="0"
-                    />
-
-                    <FormikField
-                      title="Total Expenses"
-                      name="total"
-                      type="number"
-                      placeholder="0"
-                    />
-                  </>
-                </>
+                <NafathVarificationForm values={values} />
               ) : (
                 ""
               )}
@@ -402,23 +193,41 @@ export default function ApplyOnlineForm() {
               {step >= 1 && (
                 <button
                   type="button"
-                  onClick={() => setStep((prev) => Math.min(prev - 1, 3))}
+                  onClick={() => {
+                    setStep((prev) => Math.min(prev - 1, 3));
+                    setShowModal(false);
+                  }}
                   className="px-8 py-2 rounded-full border-1 text-gray-700 border-yellow-500 hover:bg-yellow-600 font-medium transition"
                 >
-                  Back
+                  {translate("BUTTON.BACK")}
                 </button>
               )}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-8 py-2 rounded-full bg-yellow-500 hover:bg-yellow-600 text-white font-medium transition"
+                className="px-8 py-2 rounded-full bg-yellow-500 hover:bg-yellow-600 text-black font-medium transition"
               >
-                {step < 2 ? "Next" : "Submit"}
+                {step < 2 ? translate("BUTTON.NEXT") : translate("BUTTON.SUBMIT")}
               </button>
             </div>
           </Form>
         )}
       </Formik>
+      <NafathVerificationModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onNextStep={() => setStep((prev) => prev + 1)}
+      />
+      <SuccessModal
+        title={translate("ACCOUNT.CREATED_SUCCESS")}
+        subTitle={translate("ACCOUNT.CREATED_SUCCESS_MESSAGE")}
+        lowerTitle={translate("ACCOUNT.PROCEED_NEXT")}
+        isOpen={showSuccessModal}
+        onClose={() => {
+          setShowSuccessModal(false);
+          onHandleFinalSubmit();
+        }}
+      />
     </div>
   );
 }
