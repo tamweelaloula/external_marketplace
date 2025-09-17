@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import Loader from "./Loader";
+import { useTranslation } from "@/i18n";
 
 export default function NafathVerificationModal({
   isOpen,
@@ -20,6 +21,7 @@ export default function NafathVerificationModal({
   onClose: () => void;
   onNextStep: ()=> void
 }) {
+  const {translate} = useTranslation()
   const [loading, setLoading] = useState(false);
   return (
     <Dialog open={isOpen}>
@@ -39,7 +41,7 @@ export default function NafathVerificationModal({
           <>
             <Loader />
             <div className="text-2xl font-bold text-[#1F1F1F] my-3">
-              Verification Process ...
+              {translate("VERIFICATION.VERIFICATION_PROCESS")}
             </div>
           </>
         ) : (
@@ -56,10 +58,10 @@ export default function NafathVerificationModal({
                 </div>
               </div>
               <DialogTitle className="text-xl text-center font-bold text-gray-900">
-                NAFATH VERIFICATION
+                {translate("VERIFICATION.NAFATH_VERIFICATION")}
               </DialogTitle>
               <p className="text-sm text-gray-500 mt-1 text-center">
-                The verification number with the NAFATH application is
+                {translate("VERIFICATION.VERIFICATION_NUMBER")}
               </p>
             </DialogHeader>
 
@@ -73,7 +75,7 @@ export default function NafathVerificationModal({
                 className="rounded-full width-[225] w px-6 py-2 border-yellow-400 text-gray-700 hover:bg-gray-50"
                 onClick={onClose}
               >
-                Cancel
+                {translate("BUTTON.CANCEL")}
               </Button>
               <Button
                 className="rounded-full width-[225] px-6 py-2 bg-yellow-400 hover:bg-yellow-500 text-white font-medium"
@@ -86,7 +88,7 @@ export default function NafathVerificationModal({
                   }, 5000);
                 }}
               >
-                Proceed
+                {translate("BUTTON.PROCEED")}
               </Button>
             </div>
           </>
