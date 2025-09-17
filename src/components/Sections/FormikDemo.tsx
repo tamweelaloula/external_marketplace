@@ -41,7 +41,7 @@ const validationSchemas = [
   }),
 ];
 
-export default function ApplyOnlineForm() {
+export default function ApplyOnlineForm2() {
   const { translate } = useTranslation();
   const [step, setStep] = useState(0);
 
@@ -77,13 +77,29 @@ export default function ApplyOnlineForm() {
     total: "",
   };
 
-  const handleSubmit = (values: typeof initialValues) => {
-    if (step < 2) {
-      setStep((prev) => prev + 1);
+  const handleSubmit = async (values: typeof initialValues, { setSubmitting, validateForm, setTouched }: any) => {
+    const errors = await validateForm();
+
+    if (Object.keys(errors).length === 0) {
+      // ✅ No errors, move to next step
+      if (step < 2) {
+        setStep((prev) => prev + 1);
+      } else {
+        console.log("Final Submit", values);
+      }
     } else {
-      console.log("Final Submit", values);
+      // ❌ Show validation errors
+      setTouched(
+        Object.keys(errors).reduce((acc: any, key) => {
+          acc[key] = true;
+          return acc;
+        }, {})
+      );
     }
+
+    setSubmitting(false);
   };
+
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-10">

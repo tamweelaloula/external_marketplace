@@ -10,7 +10,7 @@ import Link from "next/link";
 const images = [
   "/assets/images/car.png",
   "/assets/images/car2.png",
-  "/assets/images/car3.png",
+  "/assets/images/car3.png"
 ];
 
 export default function ProductDetail({ onClick }: { onClick: () => void }) {

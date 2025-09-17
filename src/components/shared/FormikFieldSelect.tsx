@@ -4,6 +4,7 @@ interface formikfield {
   title: string;
   options: any[];
   name: string;
+  disabled?: boolean;
   value: string;
   required?: boolean;
 }
@@ -12,26 +13,24 @@ export default function FormikFieldSelect({
   options,
   name,
   value,
+  disabled = false,
   required,
 }: formikfield) {
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-1">
-        {title} {required && "*"}
+        {title} {required && <span className="text-red-500">*</span>}
       </label>
       <Field
         as="select"
         name={name}
-        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-yellow-400 focus:border-yellow-400 text-sm"
+        disabled={disabled}
+        className={`w-full ${disabled && "bg-[#E1E3E6]"} border border-gray-300 rounded-md px-3 py-2 focus:ring-yellow-400 focus:border-yellow-400 text-gray-500 text-sm`}
       >
-        <option value="">Select</option>
+        <option value="" className="text-inherit">Select</option>
         {options.map((val) => (
-          <option value={val}>{val}</option>
+          <option key={val} value={val}>{val}</option>
         ))}
-
-        {/* <option>Military</option>
-        <option>Government</option>
-        <option>Private</option> */}
       </Field>
       <ErrorMessage
         name={name}
