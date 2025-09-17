@@ -27,7 +27,7 @@ export default function ProductTabs() {
                 data-[state=active]:after:bg-yellow-500
             "
           >
-            Product Details
+            Product Overview
           </TabsTrigger>
 
           <TabsTrigger
@@ -77,12 +77,38 @@ export default function ProductTabs() {
           value="product"
           className="mt-6 text-gray-700 text-sm leading-relaxed"
         >
-          <p>Installment Details – School Fee Financing</p>
+          <p>Installment Details - School Fee Financing</p>
           <p className="mt-4">
             The annual tuition fee for Bright Future International School is AED
             24,000. Parents are required to pay an upfront down payment of AED
             4,000, while the remaining AED 20,000 can be conveniently paid in
             installments.
+          </p>
+          <p className="mt-4">
+            The financed amount is spread across 12 equal monthly installments,
+            with each installment averaging AED 1,800. The installment includes
+            both the principal amount and a small profit/markup charge that
+            gradually decreases over the repayment period.
+          </p>
+          <p className="mt-4">
+            First installment is due on 1st October 2025, amounting to AED
+            1,866.67, after which the balance reduces to AED 18,333.33.
+          </p>
+          <p className="mt-4">
+            Each subsequent month, the installment decreases slightly as the
+            profit portion reduces.
+          </p>
+          <p className="mt-4">
+            By the final installment in September 2026, the parent pays AED
+            1,666.67, clearing the balance in full.
+          </p>
+          <p className="mt-4">
+            In total, the parent pays AED 25,070 over the 12 months, which
+            covers the financed tuition plus a total markup of AED 1,070.
+          </p>
+          <p className="mt-4">
+            This plan ensures parents can manage school expenses more flexibly
+            without compromising their child’s education.
           </p>
         </TabsContent>
 

@@ -1,33 +1,35 @@
 # Stage 1: Build the application
 FROM node:22-alpine AS build
 
+RUN node -v
+
 WORKDIR /app
 
 # Install dependencies
 COPY package.json package-lock.json ./
-RUN npm install
 
-# Copy rest of the code
+# Bust cache if dependencies change
+RUN rm -rf node_modules
 COPY . .
 
-# Increase memory for build
+RUN npm install
+# Copy the rest of the application code
+
+# 🛠️ Fix: Increase memory for build process
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-# Build Next.js app
+# Build the application
 RUN npm run build
 
-# ----------------------------
 # Stage 2: Serve the application
-# ----------------------------
-FROM node:20-alpine AS runner
-
+FROM node:22-alpine AS runner
 WORKDIR /app
 
-# Copy only the necessary files from build stage
+# Copy only the necessary files from the build stage
 COPY --from=build /app ./
 
-# Expose app port
+# Expose port 3001
 EXPOSE 3001
 
-# Start Next.js
+# Start the Next.js application
 CMD ["npm", "start"]
