@@ -10,15 +10,24 @@ const locale = {
   BANNER: {
     TITLE1: "ارتقِ بـ ",
     TAMWEEL_ALOULA: " عملك",
-    TITLE_END: 'مع خدمات سوقنا',
-    SUBTITLE: "توسيع نطاق الوصول وزيادة المبيعات وإشراك العملاء من خلال سوقنا الشامل",
+    TITLE_END: "مع خدمات سوقنا",
+    SUBTITLE:
+      "توسيع نطاق الوصول وزيادة المبيعات وإشراك العملاء من خلال سوقنا الشامل",
     BUTTON: "سجل عملك التجاري",
   },
-  BUTTON:{
-    APPLY:"يتقدم"
+  BUTTON: {
+    APPLY: "يتقدم",
+    CANCEL: "إلغاء",
+    SUBMIT: "إرسال",
+    BACK: "رجوع",
+    PROCEED: "متابعة",
+    CONTINUE: "استمرار",
+    NEXT: "التالي",
   },
-  TITLE:{
+  TITLE: {
+    FINANCIAL_DETAILS: "التفاصيل المالية",
     APPLY_ONLINE: "تقدم بطلبك عبر الإنترنت",
+    FILL_FORM: "يرجى ملء النموذج أدناه للمتابعة",
     FEATURED_PRODUCTS: "المنتجات المميزة",
     RELATED_PRODUCT: "المنتجات ذات الصلة",
     CARS: "سيارات",
@@ -29,24 +38,88 @@ const locale = {
     DIOR: "ديور",
     SHOW_ALL: "عرض الكل",
     ALL: "جميع المنتجات",
+    FILTER: "تصفية",
+    PRICE_RANGE: "نطاق السعر",
+    SAR: "ر.س",
+    SORT: "ترتيب",
+    PRICE_HIGH_TO_LOW: "السعر: من الأعلى إلى الأقل",
+    PRICE_LOW_TO_HIGH: "السعر: من الأقل إلى الأعلى",
+    NEWEST: "الأحدث",
   },
-  CATEGORY_SECTION:{
+  CATEGORY_SECTION: {
     SEARCHBAR: "ابحث هنا",
     TITLE: "اختر فئة عملك",
   },
   FOOTER: {
     TITLE1: "رحلة نموك",
     TITLE2: "تبدأ من هنا",
-    SUBTITLE1: "انضم إلى الآلاف من التجار الذين وجدوا محفز نموهم مع تمويل الأولى.",
-    SUBTITLE2: "لأننا عندما نتواصل، لا ننجح فقط — بل نفتح آفاقًا جديدة من الإمكانيات.",
+    SUBTITLE1:
+      "انضم إلى الآلاف من التجار الذين وجدوا محفز نموهم مع تمويل الأولى.",
+    SUBTITLE2:
+      "لأننا عندما نتواصل، لا ننجح فقط — بل نفتح آفاقًا جديدة من الإمكانيات.",
     COPYRIGHT: "©2025 تمويل الأولى. جميع الحقوق محفوظة",
-    BUTTON: "كن شريكًا"
+    BUTTON: "كن شريكًا",
   },
-  APPLIED_ONLINE:{
-    STEP3TITLE: "التحقق من النفاذ",
-    STEP2TITLE: "تفاصيل العنوان",
-    STEP1TITLE: "معلومات أساسية"
-  }
+  APPLIED_ONLINE: {
+    GENERAL_INFO: "معلومات عامة",
+    PERSONAL_DETAILS: "تفاصيل شخصية",
+    ELIGIBILITY: "الأهلية",
+  },
+  INPUTTITLE: {
+    YES: "نعم",
+    NO: "لا",
+    NATIONAL_ID: "رقم الهوية الوطنية / رقم الإقامة",
+    DOB: "تاريخ الميلاد",
+    PHONE: "رقم الهاتف",
+    EMAIL: "البريد الإلكتروني",
+    TITLE: "اللقب",
+    NATIONALITY: "الجنسية",
+    GENDER: "الجنس",
+    REGION: "المنطقة",
+    CITY: "المدينة",
+    MARITAL_STATUS: "الحالة الاجتماعية",
+    DEPENDENTS: "عدد المعالين",
+
+    EMPLOYMENT_TYPE: "نوع الوظيفة",
+    EDUCATION_LEVEL: "المستوى التعليمي",
+    RESIDENT_STATUS: "حالة السكن",
+    EMPLOYMENT_SECTOR: "قطاع العمل",
+    OCCUPATION: "المهنة",
+    JOINING_DATE: "تاريخ الالتحاق",
+
+    PEP: "هل أنت شخص مكشوف سياسيًا، أو لديك علاقة بشخص مكشوف سياسيًا (PEP)؟",
+    BENEFICIARY: "هل أنت المستفيد الحقيقي من التمويل؟",
+    BENEFICIARY_NAME: "اسم المستفيد الحقيقي",
+    RELATIONSHIP:
+      "هل لديك علاقة من الدرجة الأولى مع عضو مجلس إدارة أو أعضاء لجان أو كبار التنفيذيين؟",
+    RELATIONSHIP_POSITION: "المنصب",
+
+    // Financial Details
+    FOOD_EXPENSES: "المصروفات الغذائية",
+    HOUSING_EXPENSES: "المصروفات السكنية",
+    DOMESTIC_EXPENSES: "المصروفات المنزلية",
+    EDUCATION_EXPENSES: "المصروفات التعليمية",
+    HEALTHCARE_EXPENSES: "المصروفات الصحية",
+    TRANSPORT_EXPENSES: "مصروفات الاتصالات والنقل",
+    INSURANCE_EXPENSES: "مصروفات التأمين",
+    FUTURE_EXPENSES: "أي مصروفات متوقعة مستقبلًا",
+    TOTAL_EXPENSES: "إجمالي المصروفات",
+  },
+  VERIFICATION: {
+    NAFATH_VERIFICATION: "التحقق عبر نفاذ",
+    VERIFICATION_NUMBER: "رقم التحقق مع تطبيق نفاذ هو",
+    VERIFICATION_PROCESS: "جاري عملية التحقق ...",
+  },
+  ACCOUNT: {
+    CREATED_SUCCESS: "تم إنشاء الحساب بنجاح",
+    CREATED_SUCCESS_MESSAGE: "تم إنشاء حسابك بنجاح.",
+    PROCEED_NEXT: "يرجى المتابعة مع الخطوات التالية",
+  },
+  APPLICATION: {
+    SUBMITTED: "تم تقديم طلبك",
+    SUBMITTED_SUCCESS_MESSAGE: "تم تقديم طلبك بنجاح.",
+    WAIT_APPROVAL: "يرجى الانتظار للموافقة",
+  },
 };
 
 export default locale;

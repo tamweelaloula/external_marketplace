@@ -1,3 +1,4 @@
+import { useTranslation } from "@/i18n";
 import { Field } from "formik";
 
 interface formikfield {
@@ -8,6 +9,7 @@ interface formikfield {
 }
 
 export default function FormikFieldRadio({ title, name, value, required }: formikfield) {
+  const {translate} = useTranslation()
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -15,10 +17,10 @@ export default function FormikFieldRadio({ title, name, value, required }: formi
       </label>
       <div className="flex gap-4">
         <label className="flex items-center gap-2 text-sm w-[138px] p-2 border-1 border-[383838] rounded-md">
-          <Field type="radio" name={name} value="yes" className="text-yellow-400" /> Yes
+          <Field type="radio" name={name} value="yes" className="text-yellow-400" /> {translate("INPUTTITLE.YES")}
         </label>
         <label className="flex items-center gap-2 text-sm w-[138px] p-2 border-1 border-[383838] rounded-md">
-          <Field type="radio" name={name} value="no" className="text-yellow-400" /> No
+          <Field type="radio" name={name} value="no" className="text-yellow-400" /> {translate("INPUTTITLE.NO")}
         </label>
       </div>
     </div>

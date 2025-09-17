@@ -11,15 +11,16 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
+import { useTranslation } from "@/i18n";
 
 export default function FilterDropdown() {
   const [range, setRange] = React.useState([1000, 5000]);
-
+  const {translate} = useTranslation()
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="ghost" className="bg-transparent text-black rounded-full mr-4 hover:none">
-          <ArrowDownUp/> Filter
+          <ArrowDownUp/> {translate("TITLE.FILTER")}
         </Button>
       </PopoverTrigger>
 
@@ -30,18 +31,18 @@ export default function FilterDropdown() {
       >
         {/* Title */}
         <h2 className="text-center font-semibold text-lg border-b pb-2">
-          Filter
+          {translate("TITLE.FILTER")}
         </h2>
 
         {/* Price Range */}
         <div className="space-y-4 mt-4">
-          <Label className="font-semibold">Price range</Label>
+          <Label className="font-semibold">{translate("TITLE.PRICE_RANGE")}</Label>
           <div className="flex items-center justify-between text-sm">
             <span className="shadow px-2 py-1 rounded bg-gray-100">
-              SAR {range[0]}
+              {translate("TITLE.SAR")} {range[0]}
             </span>
             <span className="shadow px-2 py-1 rounded bg-gray-100">
-              SAR {range[1]}
+              {translate("TITLE.SAR")} {range[1]}
             </span>
           </div>
           <Slider
@@ -66,18 +67,18 @@ export default function FilterDropdown() {
 
         {/* Sort */}
         <div className="space-y-3 mt-6">
-          <Label className="font-semibold">Sort</Label>
+          <Label className="font-semibold">{translate("TITLE.SORT")} {range[1]}</Label>
           <div className="flex items-center gap-3">
             <Checkbox className="data-[state=checked]:bg-[#F9C416] data-[state=checked]:border-[#F9C416]" />
-            <span className="text-sm">Price: High to low</span>
+            <span className="text-sm">{translate("TITLE.PRICE_HIGH_TO_LOW")} {range[1]}</span>
           </div>
           <div className="flex items-center gap-3">
             <Checkbox className="data-[state=checked]:bg-[#F9C416] data-[state=checked]:border-[#F9C416]" />
-            <span className="text-sm">Newest</span>
+            <span className="text-sm">{translate("TITLE.NEWEST")} {range[1]}</span>
           </div>
           <div className="flex items-center gap-3">
             <Checkbox className="data-[state=checked]:bg-[#F9C416] data-[state=checked]:border-[#F9C416]" />
-            <span className="text-sm">Price: low to high</span>
+            <span className="text-sm">{translate("TITLE.PRICE_LOW_TO_HIGH")} {range[1]}</span>
           </div>
         </div>
 
@@ -87,10 +88,10 @@ export default function FilterDropdown() {
             variant="outline"
             className="rounded-full w-32 border-[#F9C416] text-[#F9C416]"
           >
-            Cancel
+            {translate("BUTTON.CANCEL")}
           </Button>
           <Button className="rounded-full w-32 bg-[#F9C416] text-white hover:bg-[#e6b314]">
-            Apply
+            {translate("BUTTON.APPLY")}
           </Button>
         </div>
       </PopoverContent>
