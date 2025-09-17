@@ -28,8 +28,8 @@ WORKDIR /app
 # Copy only the necessary files from the build stage
 COPY --from=build /app ./
 
-# Expose port 3001
-EXPOSE 3001
+# Expose app port
+EXPOSE 3000
 
 # Start the Next.js application
 CMD ["npm", "start"]
