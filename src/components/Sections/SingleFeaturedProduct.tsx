@@ -54,7 +54,7 @@ export default function SingleFeaturedProduct({
         </div>
         {category === "all" ? categories.map((category)=>{
           return (
-            <div className="gap-5 mt-20">
+            <div key={category.id} className="gap-25 mt-20">
               <CustomCarousel key={category.id} title={category.label}/>
             </div>
           )
