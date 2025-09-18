@@ -171,7 +171,7 @@ export default function ApplyOnlineForm({
       {/* Form */}
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchemas[step]}
+        validationSchema={validationSchemas(translate)[step]}
         onSubmit={handleSubmit}
       >
         {({ values, isSubmitting }) => (
