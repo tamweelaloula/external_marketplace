@@ -141,7 +141,7 @@ const FeaturedProducts = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 py-12">
           {filteredProducts.map((product) => (
             <CustomCard key={product.id} product={product} />
           ))}

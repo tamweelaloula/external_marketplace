@@ -110,7 +110,7 @@ export default function CustomCarousel({ title }: { title: string }) {
       {/* Carousel */}
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
+        className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth p-12"
       >
         {products.map((product: Product) => (
           <CustomCard key={product.id} product={product} carousel />

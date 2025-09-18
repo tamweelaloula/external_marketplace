@@ -7,7 +7,7 @@ import Image from "next/image"
 export default function Footer() {
   const {translate} = useTranslation()
   return (
-    <footer className="bg-[#FFFCF7] py-12">
+    <footer className="bg-[#FFFCF7] py-12 mt-12">
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Heading */}
         <h2 className="text-2xl md:text-3xl font-bold text-[#1C1C35]">

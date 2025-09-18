@@ -13,7 +13,7 @@ export default function ProductTabs() {
             w-full flex gap-2 md:gap-4 
             justify-start 
             overflow-x-auto whitespace-nowrap 
-            bg-white border-b
+            bg-white
             scrollbar-hide
           "
         >

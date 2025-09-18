@@ -116,6 +116,12 @@ const locale = {
     CREATED_SUCCESS_MESSAGE: "Your account has been created successfully.",
     PROCEED_NEXT: "Please proceed with the next steps",
   },
+  LOAN: {
+    DETAILS: "Loan Details",
+    ENTER_DETAILS: "Kindly enter the loan details",
+    TENOR: "Tenor",
+    AMOUNT: "Amount"
+  },
   APPLICATION: {
     SUBMITTED: "Your Application is Submitted",
     SUBMITTED_SUCCESS_MESSAGE:

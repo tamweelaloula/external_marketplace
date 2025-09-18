@@ -13,28 +13,28 @@ const CategoryBanner = ({ title, hasLogo = false }: { title: string, hasLogo?: b
         alt="Decoration Left"
         width={150}
         height={150}
-        className="absolute bottom-0 left-0 opacity-80"
+        className="absolute bottom-0 left-0"
       />
       <Image
         src="/assets/svgs/shape-left.svg"
         alt="Decoration Right"
         width={150}
         height={150}
-        className="absolute top-0 right-0 opacity-80"
+        className="absolute top-0 right-0"
       />
       <Image
         src="/assets/svgs/banner-icons2.svg"
         alt="Decoration Dots Left"
         width={40}
         height={40}
-        className="absolute top-4 left-4 opacity-70 animate-bounce duration-1000 md:top-32 end-2 md:end-0"
+        className="absolute top-4 left-4 opacity-70 floating md:top-32 end-2 md:end-0"
       />
       <Image
         src="/assets/svgs/banner-icons.svg"
         alt="Decoration Dots Right"
         width={40}
         height={40}
-        className="absolute bottom-4 right-4 opacity-70 animate-bounce duration-1000 md:top-32 end-2 md:end-0"
+        className="absolute bottom-4 right-4 opacity-90 floating md:top-32 end-2 md:end-0"
       />
 
       <div className="flex flex-col items-center justify-center text-center">
