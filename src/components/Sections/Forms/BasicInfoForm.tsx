@@ -3,6 +3,7 @@ import { useTranslation } from "@/i18n";
 
 export default function BasicInfoForm() {
   const {translate} = useTranslation()
+  
   return (
     <>
       <FormikField
