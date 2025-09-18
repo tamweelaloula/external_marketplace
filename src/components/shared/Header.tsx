@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useTranslation } from "@/i18n";
 import { Button } from "@/components/ui/button";
 import LanguageDropdown from "@/components/shared/LanguageDropdown";
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/sheet";
 
 const Header = ({ onLogin }: { onLogin: () => void }) => {
-  const { translate } = useTranslation();
+  const { language, translate } = useTranslation();
 
   const navLinks = [
     { href: "/", label: translate("NAV.HOME") },
@@ -46,14 +46,14 @@ const Header = ({ onLogin }: { onLogin: () => void }) => {
 
           {/* Right side actions */}
           <div className="flex items-center gap-2">
-              <LanguageDropdown />
+            <LanguageDropdown />
             <div className="hidden md:flex gap-2">
-              <Button
-                onClick={onLogin}
+              <Link
+                href={"https://merchants.tamweel-aloula.com/"}
                 className="bg-[#F9C416] hover:bg-[#ffd342] border-none text-[#212044] font-semibold py-5 px-8 md:px-12 rounded-full"
               >
                 {translate("NAV.PARTNER")}
-              </Button>
+              </Link>
             </div>
 
             {/* Mobile Hamburger using shadcn Sheet */}
@@ -63,7 +63,10 @@ const Header = ({ onLogin }: { onLogin: () => void }) => {
                   <Menu size={28} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-64 p-6">
+              <SheetContent
+                side={language.code === "ar" ? "right" : "left"}
+                className="w-64 p-6"
+              >
                 <SheetHeader>
                   <SheetTitle>
                     <img
