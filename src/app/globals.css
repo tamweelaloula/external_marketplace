@@ -145,3 +145,21 @@ input[type="radio"]{
 input[type="radio"]:checked{
   background-color:#F9C416;
 }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.05);
+  }
+}
+
+.floating {
+  animation: float 4s ease-in-out infinite;
+}
+
+.floating-delay {
+  animation: float 5s ease-in-out infinite;
+  animation-delay: 2s;
+}

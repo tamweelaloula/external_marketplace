@@ -30,6 +30,7 @@ const locale = {
     FILL_FORM: "يرجى ملء النموذج أدناه للمتابعة",
     FEATURED_PRODUCTS: "المنتجات المميزة",
     RELATED_PRODUCT: "المنتجات ذات الصلة",
+    STORE: "متجر نقش",
     CARS: "سيارات",
     ELECTRONICS: "إلكترونيات",
     EDUCATION: "تعليم",
@@ -114,6 +115,12 @@ const locale = {
     CREATED_SUCCESS: "تم إنشاء الحساب بنجاح",
     CREATED_SUCCESS_MESSAGE: "تم إنشاء حسابك بنجاح.",
     PROCEED_NEXT: "يرجى المتابعة مع الخطوات التالية",
+  },
+  LOAN: {
+    DETAILS: "تفاصيل القرض",
+    ENTER_DETAILS: "يرجى إدخال تفاصيل القرض",
+    TENOR: "مدة السداد",
+    AMOUNT: "المبلغ"
   },
   APPLICATION: {
     SUBMITTED: "تم تقديم طلبك",
