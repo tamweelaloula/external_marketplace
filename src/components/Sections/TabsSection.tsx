@@ -2,8 +2,18 @@
 
 import * as React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import VehicleDetails from "./VehicleDetails";
+import { useTranslation } from "@/i18n";
+
+function wrapWithParagraphs(text: string): React.JSX.Element[] {
+  return text
+    .trim()
+    .split(/\n\s*\n/)
+    .map((line, i) => <p key={i}>{line.trim()}</p>);
+}
 
 export default function ProductTabs() {
+  const { translate } = useTranslation();
   return (
     <div className="w-full mx-auto py-6 md:py-8">
       <Tabs defaultValue="product" className="w-full">
@@ -11,7 +21,7 @@ export default function ProductTabs() {
         <TabsList
           className="
             w-full flex gap-2 md:gap-4 
-            justify-start 
+            justify-start rtl:justify-end   /* ✅ flip alignment when RTL */
             overflow-x-auto whitespace-nowrap 
             bg-white
             scrollbar-hide
@@ -28,14 +38,14 @@ export default function ProductTabs() {
               data-[state=active]:text-yellow-500 
               data-[state=active]:after:content-[''] 
               data-[state=active]:after:absolute 
-              data-[state=active]:after:left-0 
+              data-[state=active]:after:start-0   /* ✅ works with RTL */
               data-[state=active]:after:bottom-0 
               data-[state=active]:after:h-[2px] 
               data-[state=active]:after:w-full 
               data-[state=active]:after:bg-yellow-500
             "
           >
-            Product Overview
+            {translate("TABS.PRODUCT")}
           </TabsTrigger>
 
           <TabsTrigger
@@ -49,14 +59,14 @@ export default function ProductTabs() {
               data-[state=active]:text-yellow-500 
               data-[state=active]:after:content-[''] 
               data-[state=active]:after:absolute 
-              data-[state=active]:after:left-0 
+              data-[state=active]:after:start-0 
               data-[state=active]:after:bottom-0 
               data-[state=active]:after:h-[2px] 
               data-[state=active]:after:w-full 
               data-[state=active]:after:bg-yellow-500
             "
           >
-            Installment Details
+            {translate("TABS.INSTALLMENT")}
           </TabsTrigger>
 
           <TabsTrigger
@@ -70,97 +80,37 @@ export default function ProductTabs() {
               data-[state=active]:text-yellow-500 
               data-[state=active]:after:content-[''] 
               data-[state=active]:after:absolute 
-              data-[state=active]:after:left-0 
+              data-[state=active]:after:start-0 
               data-[state=active]:after:bottom-0 
               data-[state=active]:after:h-[2px] 
               data-[state=active]:after:w-full 
               data-[state=active]:after:bg-yellow-500
             "
           >
-            Terms & Conditions
+            {translate("TABS.TERMS")}
           </TabsTrigger>
         </TabsList>
 
         {/* Tab Content */}
         <TabsContent
           value="product"
-          className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4"
+          className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4 rtl:text-right"
         >
-          <p>Installment Details - School Fee Financing</p>
-          <p>
-            The annual tuition fee for Bright Future International School is AED
-            24,000. Parents are required to pay an upfront down payment of AED
-            4,000, while the remaining AED 20,000 can be conveniently paid in
-            installments.
-          </p>
-          <p>
-            The financed amount is spread across 12 equal monthly installments,
-            with each installment averaging AED 1,800. The installment includes
-            both the principal amount and a small profit/markup charge that
-            gradually decreases over the repayment period.
-          </p>
-          <p>
-            First installment is due on 1st October 2025, amounting to AED
-            1,866.67, after which the balance reduces to AED 18,333.33.
-          </p>
-          <p>
-            Each subsequent month, the installment decreases slightly as the
-            profit portion reduces.
-          </p>
-          <p>
-            By the final installment in September 2026, the parent pays AED
-            1,666.67, clearing the balance in full.
-          </p>
-          <p>
-            In total, the parent pays AED 25,070 over the 12 months, which
-            covers the financed tuition plus a total markup of AED 1,070.
-          </p>
-          <p>
-            This plan ensures parents can manage school expenses more flexibly
-            without compromising their child’s education.
-          </p>
+          <VehicleDetails />
         </TabsContent>
 
         <TabsContent
           value="installment"
-          className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4"
+          className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4 rtl:text-right"
         >
-          <p>
-            The financed amount is spread across 12 equal monthly installments,
-            with each installment averaging AED 1,800. The installment includes
-            both the principal amount and a small profit/markup charge that
-            gradually decreases over the repayment period.
-          </p>
-          <p>
-            First installment is due on 1st October 2025, amounting to AED
-            1,866.67, after which the balance reduces to AED 18,333.33.
-          </p>
-          <p>
-            Each subsequent month, the installment decreases slightly as the
-            profit portion reduces.
-          </p>
-          <p>
-            By the final installment in September 2026, the parent pays AED
-            1,666.67, clearing the balance in full.
-          </p>
-          <p>
-            In total, the parent pays AED 25,070 over the 12 months, which
-            covers the financed tuition plus a total markup of AED 1,070.
-          </p>
-          <p>
-            This plan ensures parents can manage school expenses more flexibly
-            without compromising their child’s education.
-          </p>
+          {wrapWithParagraphs(translate("TABS.INSTALLMENT_CONTENT"))}
         </TabsContent>
 
         <TabsContent
           value="terms"
-          className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4"
+          className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4 rtl:text-right"
         >
-          <p>
-            Terms and conditions go here. You can place legal disclaimers,
-            repayment policies, or other important information in this section.
-          </p>
+          {wrapWithParagraphs(translate("TABS.TERMS_CONTENT"))}
         </TabsContent>
       </Tabs>
     </div>

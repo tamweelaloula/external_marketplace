@@ -1,6 +1,5 @@
 "use client";
 import { useTranslation } from "@/i18n";
-import { Button } from "@/components/ui/button";
 import LanguageDropdown from "@/components/shared/LanguageDropdown";
 import Link from "next/link";
 import { Menu } from "lucide-react";
@@ -50,7 +49,7 @@ const Header = ({ onLogin }: { onLogin: () => void }) => {
             <div className="hidden md:flex gap-2">
               <Link
                 href={"https://merchants.tamweel-aloula.com/"}
-                className="bg-[#F9C416] hover:bg-[#ffd342] border-none text-[#212044] font-semibold py-5 px-8 md:px-12 rounded-full"
+                className="bg-[#F9C416] hover:bg-[#ffd342] border-none text-[#212044] font-semibold py-2 px-2 md:px-6 rounded-full"
               >
                 {translate("NAV.PARTNER")}
               </Link>
@@ -89,12 +88,12 @@ const Header = ({ onLogin }: { onLogin: () => void }) => {
                     </SheetClose>
                   ))}
                   <SheetClose asChild>
-                    <Button
-                      onClick={onLogin}
-                      className="bg-[#F9C416] hover:bg-[#ffd342] border-none text-[#212044] font-semibold rounded-full mt-6"
+                    <Link
+                      href={"https://merchants.tamweel-aloula.com/"}
+                      className="bg-[#F9C416] hover:bg-[#ffd342] border-none text-[#212044] text-center font-semibold py-2 px-2 md:px-6 rounded-full"
                     >
                       {translate("NAV.PARTNER")}
-                    </Button>
+                    </Link>
                   </SheetClose>
                 </nav>
               </SheetContent>
