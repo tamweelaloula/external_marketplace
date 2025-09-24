@@ -23,3 +23,11 @@ export const categories: (Category & { icon: LucideIcon })[] = [
   { id: "health", label: "HEALTH", path: "/health", icon: HeartPulse },
   { id: "furniture", label: "FURNITURE", path: "/furniture", icon: Armchair },
 ];
+
+export function wrapWithParagraphs(text: string): string {
+  return text
+    .trim()
+    .split(/\n\s*\n/)
+    .map(line => `<p>${line.trim()}</p>`)
+    .join("\n");
+}
