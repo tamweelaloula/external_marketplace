@@ -21,7 +21,7 @@ export default function ProductTabs() {
         <TabsList
           className="
             w-full flex gap-2 md:gap-4 
-            justify-start rtl:justify-end   /* ✅ flip alignment when RTL */
+            justify-start rtl:justify-end   /* flip alignment when RTL */
             overflow-x-auto whitespace-nowrap 
             bg-white
             scrollbar-hide
@@ -30,15 +30,16 @@ export default function ProductTabs() {
           <TabsTrigger
             value="product"
             className="
-              relative px-3 md:px-4 py-2 text-sm md:text-base font-medium text-gray-700
+              relative px-3 md:px-4 pt-2 pb-4 text-sm md:text-base font-medium text-gray-700
               rounded-none shadow-none whitespace-nowrap
+              data-[state=active]:after:bottom-[-2px]
               data-[state=active]:bg-transparent 
               data-[state=active]:shadow-none 
               data-[state=active]:rounded-none 
               data-[state=active]:text-yellow-500 
               data-[state=active]:after:content-[''] 
               data-[state=active]:after:absolute 
-              data-[state=active]:after:start-0   /* ✅ works with RTL */
+              data-[state=active]:after:start-0   /* works with RTL */
               data-[state=active]:after:bottom-0 
               data-[state=active]:after:h-[2px] 
               data-[state=active]:after:w-full 
@@ -51,7 +52,7 @@ export default function ProductTabs() {
           <TabsTrigger
             value="installment"
             className="
-              relative px-3 md:px-4 py-2 text-sm md:text-base font-medium text-gray-700 
+              relative px-3 md:px-4 pt-2 pb-4 text-sm md:text-base font-medium text-gray-700 
               rounded-none shadow-none whitespace-nowrap
               data-[state=active]:bg-transparent 
               data-[state=active]:shadow-none 
@@ -72,7 +73,7 @@ export default function ProductTabs() {
           <TabsTrigger
             value="terms"
             className="
-              relative px-3 md:px-4 py-2 text-sm md:text-base font-medium text-gray-700 
+              relative px-3 md:px-4 pt-2 pb-4 text-sm md:text-base font-medium text-gray-700 
               rounded-none shadow-none whitespace-nowrap
               data-[state=active]:bg-transparent 
               data-[state=active]:shadow-none 

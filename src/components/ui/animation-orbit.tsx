@@ -38,7 +38,7 @@ export default function AnimatedOrbit() {
       </div>
 
       {/* Orbiting / floating icons */}
-        <Image
+      <Image
         src="/assets/svgs/animation-home/cart.svg"
         alt="Cart"
         width={80}
@@ -50,13 +50,14 @@ export default function AnimatedOrbit() {
             hover:scale-125 hover:drop-shadow-[0_0_10px_rgba(255,200,0,0.8)] 
             transition-transform
         "
-        />
+      />
       <Image
         src="/assets/svgs/animation-home/box.svg"
         alt="Box"
         width={80}
         height={80}
-        className="floating-delay absolute bottom-[15%] left-[25%] w-[50px] sm:w-[60px] md:w-[70px] lg:w-[80px] z-20"
+        className="floating-delay absolute bottom-[15%] left-[25%] w-[50px] sm:w-[60px] md:w-[70px] lg:w-[80px] z-20 
+"
       />
       <Image
         src="/assets/svgs/animation-home/percent.svg"

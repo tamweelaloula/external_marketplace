@@ -9,8 +9,9 @@ const locale = {
   },
   BANNER: {
     TITLE1: "Elevate your",
-    TAMWEEL_ALOULA: "Business",
-    TITLE_END: "with our marketplace services",
+    YELLOW_TEXT: "Business",
+    SECOND_TEXT: "with our",
+    TITLE_END: "marketplace services",
     SUBTITLE:
       "Expand reach, grow sales, and engage customers with our all-in-one marketplace",
   },
@@ -28,14 +29,18 @@ const locale = {
     NEXT: "Next",
   },
   TITLE: {
+    NO_PRODUCTS_FOUND: "No Products Found",
     FINANCIAL_DETAILS: "Financial Details",
     APPLY_ONLINE: "Apply Online",
     FILL_FORM: "Kindly fill out the form below to continue",
     SHOW_ALL: "Show All",
     ALL: "All Products",
     FEATURED_PRODUCTS: "Featured Products",
+    JARIR_PRODUCT: "Jarir Bookstore - All Products",
     RELATED_PRODUCT: "Related Products",
-    STORE: "Naqsh Store",
+    NAQSH: "Naqsh Store",
+    SMARTPHONES: "Smartphones",
+    COMPUTERS: "Computers & Tablets",
     CARS: "Cars",
     ELECTRONICS: "Electronics",
     EDUCATION: "Education",
@@ -49,6 +54,11 @@ const locale = {
     PRICE_HIGH_TO_LOW: "Price: High to low",
     PRICE_LOW_TO_HIGH: "Price: Low to high",
     NEWEST: "Newest",
+    IPHONESMARTPHONE: "iPhone - smartphones",
+    PROMOTITLE: "Empower Your Business with Flexible Financing",
+    PROMOSUBTITLE:
+      "We provide quick and reliable financial solutions to help your business grow.",
+    PROMOBUTTON: "Learn More",
   },
   FOOTER: {
     TITLE1: "Your Growth Journey",
@@ -167,8 +177,8 @@ const locale = {
     FUTURE_REQUIRED: "Any Expected future Expenses is required",
     TOTAL_REQUIRED: "Total Expenses is required",
   },
-  TABS:{
-    VEHICLE_DETAILS:"Vehicle Details",
+  TABS: {
+    VEHICLE_DETAILS: "Vehicle Details",
     PRODUCT: "Product Overview",
     INSTALLMENT: "Installment Details",
     TERMS: "Terms & Conditions",
