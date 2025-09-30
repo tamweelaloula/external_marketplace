@@ -8,12 +8,12 @@ const locale = {
     FOR_MERCHANT: "للتجار",
   },
   BANNER: {
-    TITLE1: "ارتقِ بـ ",
-    TAMWEEL_ALOULA: " عملك",
-    TITLE_END: "مع خدمات سوقنا",
+    TITLE1: "ارتقِ بــ",
+    YELLOW_TEXT: "عملك",
+    SECOND_TEXT: "من خلال",
+    TITLE_END: "خدمات السوق الخاصة بنا",
     SUBTITLE:
-      "توسيع نطاق الوصول وزيادة المبيعات وإشراك العملاء من خلال سوقنا الشامل",
-    BUTTON: "سجل عملك التجاري",
+      "وسّع نطاقك، وزِد مبيعاتك، وتفاعل مع عملائك من خلال منصتنا الشاملة",
   },
   BUTTON: {
     APPLY: "يتقدم",
@@ -25,13 +25,17 @@ const locale = {
     NEXT: "التالي",
   },
   TITLE: {
+    NO_PRODUCTS_FOUND: "لا توجد منتجات",
     FINANCIAL_DETAILS: "التفاصيل المالية",
     APPLY_ONLINE: "تقدم بطلبك عبر الإنترنت",
     FILL_FORM: "يرجى ملء النموذج أدناه للمتابعة",
     FEATURED_PRODUCTS: "المنتجات المميزة",
+    JARIR_PRODUCT: "مكتبة جرير - جميع المنتجات",
     RELATED_PRODUCT: "المنتجات ذات الصلة",
-    STORE: "متجر نقش",
+    NAQSH: "متجر نقش",
     CARS: "سيارات",
+    SMARTPHONES: "الهواتف الذكية",
+    COMPUTERS: "الحواسيب والأجهزة اللوحية",
     ELECTRONICS: "إلكترونيات",
     EDUCATION: "تعليم",
     HEALTH: "صحة",
@@ -46,6 +50,11 @@ const locale = {
     PRICE_HIGH_TO_LOW: "السعر: من الأعلى إلى الأقل",
     PRICE_LOW_TO_HIGH: "السعر: من الأقل إلى الأعلى",
     NEWEST: "الأحدث",
+    IPHONESMARTPHONE: "آيفون - الهواتف الذكية",
+    PROMOTITLE: "نمكّن عملك بتمويل مرن",
+    PROMOSUBTITLE:
+      "نقدّم حلولاً مالية سريعة وموثوقة لمساعدتك على تنمية عملك.",
+    PROMOBUTTON: "اعرف المزيد"
   },
   CATEGORY_SECTION: {
     SEARCHBAR: "ابحث هنا",
@@ -166,7 +175,7 @@ const locale = {
     FUTURE_REQUIRED: "أي مصاريف مستقبلية متوقعة مطلوبة",
     TOTAL_REQUIRED: "إجمالي المصاريف مطلوب",
   },
-  TABS:{
+  TABS: {
     VEHICLE_DETAILS: "تفاصيل المركبة",
     PRODUCT: "نظرة عامة على المنتج",
     INSTALLMENT: "تفاصيل الأقساط",

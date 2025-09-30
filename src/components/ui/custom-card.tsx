@@ -4,18 +4,29 @@ import Link from "next/link";
 
 interface customCard {
   product: Product;
+  brand?: boolean;
+  category?: string;
   carousel?: boolean;
 }
 
-export default function CustomCard({ product, carousel }: customCard) {
+export default function CustomCard({
+  product,
+  brand,
+  category,
+  carousel,
+}: customCard) {
   return (
     <Link
-      href={`/categories/${product.category}/details`}
+      href={
+        category === "jarir"
+          ? `/merchants/${category}/smartphones`
+          : `/categories/${product.category}/details`
+      }
       key={product.id}
-      className="bg-white w-[321px] h-[282px] rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 cursor-pointer flex flex-col"
+      className="bg-white w-full rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 cursor-pointer flex flex-col"
     >
       {/* Image Wrapper */}
-      <div className="relative w-[281px] h-[180px] mx-auto mb-4 rounded-lg overflow-hidden">
+      <div className="relative w-full aspect-[16/9] mb-4 rounded overflow-hidden">
         <Image
           src={product.image}
           alt={product.title}
@@ -29,7 +40,7 @@ export default function CustomCard({ product, carousel }: customCard) {
         <h3 className="text-base font-semibold text-[#242424] truncate">
           {product.title}
         </h3>
-        <p className="text-sm text-gray-600 mt-1">{product.price}</p>
+        {brand && <p className="text-sm text-gray-600 mt-1">{product.price}</p>}
       </div>
     </Link>
   );

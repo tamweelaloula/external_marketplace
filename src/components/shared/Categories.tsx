@@ -3,6 +3,7 @@
 import { useTranslation } from "@/i18n";
 import { categories, cn } from "@/lib/utils"; // helper for conditional classes if you use shadcn
 import Link from "next/link";
+import { ReactSVG } from "react-svg";
 
 const Categories = () => {
   const { translate } = useTranslation();
@@ -17,14 +18,24 @@ const Categories = () => {
           {categories.map((category) => (
             <Link
               key={category.id}
-              className={cn(
-                "flex flex-col bg-white hover:bg-gray-50 text-[#212044] items-center justify-center w-28 h-28 rounded-full shadow-md cursor-pointer transition hover:text-[#F9C416]"
-              )}
               href={`categories/${category.path}`}
-              // onClick={() => console.log(`Clicked on ${category.label}`)}
+              className={cn(
+                "flex flex-col items-center justify-center cursor-pointer hover:text-[#F9C416]"
+              )}
             >
-              <div className="mb-2">{<category.icon />}</div>
-              <span className={cn("text-sm font-medium text-inherit")}>
+              {/* Circle container around the SVG */}
+              <div
+                className={cn(
+                  "flex items-center justify-center w-25 h-25 rounded-full shadow-md bg-white text-gray-500 transition-colors hover:text-inherit hover:bg-[#FFFCF7]"
+                )}
+              >
+                <ReactSVG
+                  src={category.icon}
+                  className="w-10 h-10 [&_svg]:w-full [&_svg]:h-full [&_svg]:mx-auto [&_svg]:my-auto"
+                />
+              </div>
+              {/* Text below should not change color */}
+              <span className="mt-2 text-sm font-medium text-inherit">
                 {translate(`TITLE.${category.label}`)}
               </span>
             </Link>

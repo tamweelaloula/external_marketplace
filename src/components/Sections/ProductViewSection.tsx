@@ -33,7 +33,7 @@ export default function ProductDetail({ onClick }: { onClick: () => void }) {
           <div className="flex flex-col gap-4">
             <div className="relative rounded-lg overflow-hidden">
               {/* Main image - responsive heights */}
-              <div className="relative w-full h-60 sm:h-72 md:h-80 lg:h-[380px]">
+              <div className="relative w-full h-60 sm:h-72 md:h-80 lg:h-[300px]">
                 <Image
                   src={images[current]}
                   alt={`Car ${current + 1}`}
@@ -69,8 +69,8 @@ export default function ProductDetail({ onClick }: { onClick: () => void }) {
                     key={idx}
                     className={`transition-all duration-200 rounded-full ${
                       idx === current
-                        ? "w-10 md:w-12 h-1 bg-white"
-                        : "w-6 md:w-8 h-1 bg-white/40"
+                        ? "w-20 md:w-52 sm:w-20 h-1 bg-white"
+                        : "w-16 md:w-38 sm:w-20 h-1 bg-white/40"
                     }`}
                   />
                 ))}
@@ -78,19 +78,19 @@ export default function ProductDetail({ onClick }: { onClick: () => void }) {
             </div>
 
             {/* Thumbnails */}
-            <div className="flex gap-3 overflow-x-auto py-1 scrollbar-hide">
+            <div className="grid grid-cols-3 gap-3 w-full">
               {images.map((img, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrent(index)}
-                  className={`flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
+                  className={`relative rounded-lg overflow-hidden border-2 transition-all ${
                     index === current
                       ? "border-yellow-400 scale-105"
                       : "border-transparent"
                   }`}
                   aria-label={`Thumbnail ${index + 1}`}
                 >
-                  <div className="relative w-20 sm:w-24 md:w-28 h-14 sm:h-16 md:h-20">
+                  <div className="relative w-full h-24 sm:h-28 md:h-32 lg:h-36">
                     <Image
                       src={img}
                       alt={`thumb ${index}`}
@@ -104,7 +104,7 @@ export default function ProductDetail({ onClick }: { onClick: () => void }) {
           </div>
 
           {/* Right - Product Info */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 md:mt-10">
             <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900">
               Mercedes-Benz, C Class
             </h2>
@@ -123,7 +123,7 @@ export default function ProductDetail({ onClick }: { onClick: () => void }) {
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
                 <Image
-                  src="/assets/svgs/demo-logo.svg"
+                  src="/assets/svgs/naqsh-store.svg"
                   alt="Store Logo"
                   width={28}
                   height={28}
