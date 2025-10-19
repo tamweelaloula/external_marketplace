@@ -9,8 +9,9 @@ const locale = {
   },
   BANNER: {
     TITLE1: "Elevate your",
-    TAMWEEL_ALOULA: "Business",
-    TITLE_END: "with our marketplace services",
+    YELLOW_TEXT: "Business",
+    SECOND_TEXT: "with our",
+    TITLE_END: "marketplace services",
     SUBTITLE:
       "Expand reach, grow sales, and engage customers with our all-in-one marketplace",
   },
@@ -28,14 +29,18 @@ const locale = {
     NEXT: "Next",
   },
   TITLE: {
+    NO_PRODUCTS_FOUND: "No Products Found",
     FINANCIAL_DETAILS: "Financial Details",
     APPLY_ONLINE: "Apply Online",
     FILL_FORM: "Kindly fill out the form below to continue",
     SHOW_ALL: "Show All",
     ALL: "All Products",
     FEATURED_PRODUCTS: "Featured Products",
+    JARIR_PRODUCT: "Jarir Bookstore - All Products",
     RELATED_PRODUCT: "Related Products",
-    STORE: "Naqsh Store",
+    NAQSH: "Naqsh Store",
+    SMARTPHONES: "Smartphones",
+    COMPUTERS: "Computers & Tablets",
     CARS: "Cars",
     ELECTRONICS: "Electronics",
     EDUCATION: "Education",
@@ -49,6 +54,11 @@ const locale = {
     PRICE_HIGH_TO_LOW: "Price: High to low",
     PRICE_LOW_TO_HIGH: "Price: Low to high",
     NEWEST: "Newest",
+    IPHONESMARTPHONE: "iPhone - smartphones",
+    PROMOTITLE: "Empower Your Business with Flexible Financing",
+    PROMOSUBTITLE:
+      "We provide quick and reliable financial solutions to help your business grow.",
+    PROMOBUTTON: "Learn More",
   },
   FOOTER: {
     TITLE1: "Your Growth Journey",
@@ -167,6 +177,37 @@ const locale = {
     FUTURE_REQUIRED: "Any Expected future Expenses is required",
     TOTAL_REQUIRED: "Total Expenses is required",
   },
+  TABS: {
+    VEHICLE_DETAILS: "Vehicle Details",
+    PRODUCT: "Product Overview",
+    INSTALLMENT: "Installment Details",
+    TERMS: "Terms & Conditions",
+    INSTALLMENT_CONTENT: `
+      The financed amount is spread across 12 equal monthly installments,
+      with each installment averaging AED 1,800. The installment includes
+      both the principal amount and a small profit/markup charge that
+      gradually decreases over the repayment period.
+
+      First installment is due on 1st October 2025, amounting to AED
+      1,866.67, after which the balance reduces to AED 18,333.33.
+
+      Each subsequent month, the installment decreases slightly as the
+      profit portion reduces.
+
+      By the final installment in September 2026, the parent pays AED
+      1,666.67, clearing the balance in full.
+
+      In total, the parent pays AED 25,070 over the 12 months, which
+      covers the financed tuition plus a total markup of AED 1,070.
+
+      This plan ensures parents can manage school expenses more flexibly
+      without compromising their child’s education.
+    `,
+    TERMS_CONTENT: `
+      Terms and conditions go here. You can place legal disclaimers,
+      repayment policies, or other important information in this section.
+    `
+  }
 };
 
 export default locale;

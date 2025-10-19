@@ -1,10 +1,7 @@
-import { LucideIcon } from "lucide-react";
-import React from "react";
-
 export interface Category {
   id: string;
   label: string;
-  icon: LucideIcon;
+  icon: string;
   path: string;
   active?: boolean;
 }

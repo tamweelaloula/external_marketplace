@@ -3,7 +3,13 @@
 import { useTranslation } from "@/i18n";
 import Image from "next/image";
 
-const CategoryBanner = ({ title, hasLogo = false }: { title: string, hasLogo?: boolean }) => {
+const CategoryBanner = ({
+  title,
+  hasLogo = false,
+}: {
+  title: string;
+  hasLogo?: boolean;
+}) => {
   const { translate } = useTranslation();
   return (
     <section className="relative w-full h-[312px] flex items-center justify-center bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-md overflow-hidden">
@@ -39,19 +45,22 @@ const CategoryBanner = ({ title, hasLogo = false }: { title: string, hasLogo?: b
 
       <div className="flex flex-col items-center justify-center text-center">
         {/* Logo */}
-        {hasLogo && <Image
-          src="/assets/svgs/demo-logo.svg"
-          alt="Decoration Dots Right"
-          width={40}
-          height={40}
-        />}
-        
-        {/* Title */}
-        <h2 className="mt-2 text-[48px] font-semibold text-gray-800 font-[700]">
-          {translate(`TITLE.${title}`)}
-        </h2>
-      </div>
+        {hasLogo && (
+          <Image
+            src={`/assets/svgs/${title}-store.svg`}
+            alt="Decoration Dots Right"
+            width={title === "jarir" ? 392 : 40}
+            height={title === "jarir" ? 79 : 40}
+          />
+        )}
 
+        {/* Title */}
+        {title !== "jarir" && (
+          <h2 className="mt-2 text-[48px] font-semibold text-gray-800 font-[700]">
+            {translate(`TITLE.${title.toUpperCase()}`)}
+          </h2>
+        )}
+      </div>
     </section>
   );
 };
