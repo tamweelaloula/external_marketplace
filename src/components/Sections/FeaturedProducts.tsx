@@ -2,33 +2,36 @@
 
 import { useState, useMemo } from "react";
 import { useTranslation } from "@/i18n";
-import { Product } from "@/lib/types";
 import CustomCard from "../ui/custom-card";
 import Link from "next/link";
+import { useGetAllProductsQuery } from "@/lib/services/getAllProducts";
+import { ProductSkeleton } from "../shared/ProductSkeleton";
 
-// Products Data
-const products: Product[] = Array.from({ length: 11 }, (_, i) => ({
-  id: `${i + 1}`,
-  category: i % 4 === 0 ? "ELECTRONICS" : i % 3 === 0 ? "HEALTH" : "CARS",
-  title:
-    i % 3 === 0 ? "Massage World" : i % 2 === 0 ? "Calvin Klein" : "Amazon.sa",
-  store: "Amazon.sa",
-  price: "1000 SAR",
-  image: "/assets/images/Container.png",
-}));
-
-// Categories
-const categories = ["CARS", "ELECTRONICS", "EDUCATION", "HEALTH", "FURNITURE"];
+// Categories (map to API product_type)
+const categories = [
+  "VEHICLE",
+  "ELECTRONICS",
+  "SCHOOL",
+  "HEALTH",
+  "FURNITURE",
+];
 
 const FeaturedProducts = () => {
   const { translate } = useTranslation();
   const [activeCategory, setActiveCategory] = useState(categories[0]);
 
-  // Memoized filtering for better performance
-  const filteredProducts = useMemo(
-    () => products.filter((product) => product.category === activeCategory),
-    [activeCategory]
-  );
+  // Fetch products for the selected category
+  const { data, isFetching, isError } = useGetAllProductsQuery({
+    page: 1,
+    limit: 12,
+    product_type: activeCategory,
+  });
+
+  // Extract products list safely
+  const products = useMemo(() => {
+    if (!data?.data?.categories) return [];
+    return Object.values(data.data.categories).flat();
+  }, [data]);
 
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-12">
@@ -67,11 +70,32 @@ const FeaturedProducts = () => {
         </div>
 
         {/* Product Grid */}
-        {filteredProducts.length > 0 ? (
+        {isFetching ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 py-12">
-            {filteredProducts.map((product) => (
-              <div key={product.id} className="min-w-0">
-                <CustomCard product={product} />
+            {Array.from({ length: 8 }).map((_, i) => (
+              <ProductSkeleton key={i} />
+            ))}
+          </div>
+        ) : isError ? (
+          <p className="text-center text-red-500 py-12">
+            {translate("TITLE.FAILED_TO_LOAD")}
+          </p>
+        ) : products.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 py-12">
+            {products.map((product: any) => (
+              <div key={product.product_id} className="min-w-0">
+                <CustomCard
+                  product={{
+                    id: product.product_id,
+                    category: product.product_type,
+                    title_en: product.title_en,
+                    store: "Marketplace",
+                    price: `${product.price} ${product.currency}`,
+                    image:
+                      product.main_image_url ?? "/assets/svgs/placeholder.svg",
+                  }}
+                  brand
+                />
               </div>
             ))}
           </div>

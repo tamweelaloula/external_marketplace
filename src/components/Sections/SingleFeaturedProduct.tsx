@@ -1,42 +1,104 @@
+"use client";
+
 import { useTranslation } from "@/i18n";
 import { Input } from "../ui/input";
-import { Product } from "@/lib/types";
 import CustomCard from "../ui/custom-card";
 import CustomCarousel from "../shared/CustomCarousel";
-import { categories, jarirCategories } from "@/lib/utils";
 import FilterDialog from "../shared/FilterDropdown";
 import { useParams } from "next/navigation";
-
-const products: Product[] = [
-  {
-    id: "1",
-    category: "CARS",
-    title: "Amazon.sa",
-    store: "Amazon.sa",
-    price: "1000 SAR",
-    image: "/assets/images/Container.png",
-  },
-  {
-    id: "2",
-    category: "CARS",
-    title: "Amazon.sa",
-    store: "Amazon.sa",
-    price: "1000 SAR",
-    image: "/assets/images/demo.png",
-  },
-];
+import { ProductSkeleton } from "../shared/ProductSkeleton";
+import { useGetAllProductsQuery } from "@/lib/services/getAllProducts";
+import { useState, useMemo } from "react";
+import { Product } from "@/lib/types";
 
 export default function SingleFeaturedProduct({
   title,
   category,
   hasFilter = false,
+  merchantProducts,
 }: {
   title: string;
   category: string;
   hasFilter?: boolean;
+  merchantProducts?: Product[];
 }) {
   const { merchant } = useParams<{ merchant: string }>();
   const { translate } = useTranslation();
+
+  const [filters, setFilters] = useState({
+    min_price: 100,
+    max_price: 115000,
+    sort: "newest",
+  });
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [appliedSearch, setAppliedSearch] = useState(""); // Only changes on Enter
+
+  // Handle search input + Enter press
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setAppliedSearch(searchTerm.trim());
+    }
+  };
+
+  // Build query params dynamically for API
+  const queryParams = useMemo(() => {
+    const params: Record<string, any> = {
+      page: 1,
+      limit: 12,
+      min_price: filters.min_price,
+      max_price: filters.max_price,
+      sort: filters.sort as "newest" | "price_high" | "price_low",
+    };
+
+    if (category !== "all") {
+      params.product_type = category === "cars" ? "VEHICLE" : category;
+    }
+
+    if (appliedSearch) {
+      params.search = appliedSearch;
+    }
+
+    return params;
+  }, [category, filters, appliedSearch]);
+
+  // Skip API call if merchantProducts provided
+  const shouldSkip = !!merchantProducts && merchantProducts.length > 0;
+  const { data, isLoading, isFetching, isError } = useGetAllProductsQuery(queryParams, {
+    skip: shouldSkip,
+  });
+
+  // Use prop data or API data
+  const categoriesData = data?.data?.categories || {};
+  let products =
+    merchantProducts && merchantProducts.length > 0
+      ? merchantProducts
+      : category === "all"
+      ? categoriesData
+      : categoriesData[category === "cars" ? "VEHICLE" : category] || [];
+
+  // Client-side search filter for merchantProducts
+  if (merchantProducts && merchantProducts.length > 0 && appliedSearch) {
+    const lowerSearch = appliedSearch.toLowerCase();
+    products = merchantProducts.filter(
+      (product) =>
+        product.title_en?.toLowerCase().includes(lowerSearch) ||
+        product.category?.toLowerCase().includes(lowerSearch)
+    );
+  }
+
+  const loading = !shouldSkip && (isLoading || isFetching);
+  const error = !shouldSkip && isError;
+  const empty =
+    !loading &&
+    !error &&
+    ((category === "all" && Object.keys(categoriesData).length === 0) ||
+      (category !== "all" && Array.isArray(products) && products.length === 0));
+  
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
@@ -49,61 +111,83 @@ export default function SingleFeaturedProduct({
                   ? merchant === "jarir"
                     ? "JARIR_PRODUCT"
                     : "FEATURED_PRODUCTS"
-                  : title
+                  : "FEATURED_PRODUCTS"
               }`
             )}
           </h2>
-          <div className="flex">
-            {hasFilter && <FilterDialog />}
+
+          <div className="flex items-center gap-2">
+            {hasFilter && category !== "all" && (
+              <FilterDialog onApply={setFilters} />
+            )}
             <Input
-              className="w-70"
+              className="w-72"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              onKeyDown={handleKeyPress} // Trigger API or filter on Enter
               placeholder={translate("CATEGORY_SECTION.SEARCHBAR")}
             />
           </div>
         </div>
-        {category === "all" && merchant == "jarir" ? (
-          jarirCategories.map((category) => {
-            return (
-              <div key={category.id} className="gap-25 mt-20">
-                <CustomCarousel
-                  key={category.id}
-                  title={category.label}
-                  category={merchant}
-                />
-              </div>
-            );
-          })
-        ) : category === "all" && merchant == "naqsh" ? (
-          categories.map((category) => {
-            return (
-              <div key={category.id} className="gap-25 mt-20">
-                <CustomCarousel
-                  key={category.id}
-                  title={category.label}
-                  category={merchant}
-                />
-              </div>
-            );
-          })
-        ) : (
+
+        {/* Loading */}
+        {loading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-            {products.map((product) => (
-              <CustomCard
-                key={product.id}
-                product={
-                  category === "smartphones"
-                    ? {
-                        ...product,
-                        title: "Iphone 13",
-                        image: "/assets/images/iphone13.png",
-                      }
-                    : product
-                }
-                category={category}
-                brand={merchant === "jarir"}
-              />
+            {Array.from({ length: 8 }).map((_, i) => (
+              <ProductSkeleton key={i} />
             ))}
           </div>
+        )}
+
+        {/* Error */}
+        {error && (
+          <div className="col-span-full text-center text-red-500">
+            Failed to load products.
+          </div>
+        )}
+
+        {/* Empty */}
+        {empty && (
+          <div className="col-span-full text-center text-gray-500">
+            {translate("NO_PRODUCTS_FOUND")}
+          </div>
+        )}
+
+        {/* Products */}
+        {!loading && !error && !empty && (
+          <>
+            {category === "all" ? (
+              Object.entries(products).map(([catName, catProducts]) => (
+                <div key={catName} className="gap-25 mt-20">
+                  <CustomCarousel
+                    title={catName.toUpperCase()}
+                    category={merchant}
+                    products={catProducts as Product[]}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+                {products.map((product: any) => (
+                  <CustomCard
+                    key={product.product_id || product.id}
+                    product={{
+                      id: product.product_id || product.id,
+                      category: product.product_type || product.category,
+                      title_en: product.title_en,
+                      store: "Marketplace",
+                      price: `${product.price} ${product.currency || ""}`,
+                      image:
+                        product.main_image_url ||
+                        "/assets/svgs/placeholder.svg",
+                    }}
+                    category={category}
+                    brand
+                  />
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>

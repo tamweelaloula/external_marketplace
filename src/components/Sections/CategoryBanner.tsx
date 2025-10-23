@@ -10,6 +10,7 @@ const CategoryBanner = ({
   title: string;
   hasLogo?: boolean;
 }) => {
+
   const { translate } = useTranslation();
   return (
     <section className="relative w-full h-[312px] flex items-center justify-center bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-md overflow-hidden">
@@ -47,17 +48,17 @@ const CategoryBanner = ({
         {/* Logo */}
         {hasLogo && (
           <Image
-            src={`/assets/svgs/${title}-store.svg`}
+            src={`/assets/svgs/naqsh-store.svg`}
             alt="Decoration Dots Right"
-            width={title === "jarir" ? 392 : 40}
-            height={title === "jarir" ? 79 : 40}
+            width={40}
+            height={40}
           />
         )}
 
         {/* Title */}
         {title !== "jarir" && (
           <h2 className="mt-2 text-[48px] font-semibold text-gray-800 font-[700]">
-            {translate(`TITLE.${title.toUpperCase()}`)}
+            {title === "ALL" ? translate(`TITLE.${title}`) : title}
           </h2>
         )}
       </div>

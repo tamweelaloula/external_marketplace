@@ -34,16 +34,16 @@ const locale = {
     APPLY_ONLINE: "Apply Online",
     FILL_FORM: "Kindly fill out the form below to continue",
     SHOW_ALL: "Show All",
-    ALL: "All Products",
+    ALL: "Explore product catalogue",
     FEATURED_PRODUCTS: "Featured Products",
     JARIR_PRODUCT: "Jarir Bookstore - All Products",
     RELATED_PRODUCT: "Related Products",
     NAQSH: "Naqsh Store",
     SMARTPHONES: "Smartphones",
     COMPUTERS: "Computers & Tablets",
-    CARS: "Cars",
+    VEHICLE: "Cars",
     ELECTRONICS: "Electronics",
-    EDUCATION: "Education",
+    SCHOOL: "Education",
     HEALTH: "Health",
     FURNITURE: "Furniture",
     DIOR: "DIOR",
@@ -59,6 +59,7 @@ const locale = {
     PROMOSUBTITLE:
       "We provide quick and reliable financial solutions to help your business grow.",
     PROMOBUTTON: "Learn More",
+    UNCATEGORIZED: "Uncategorized",
   },
   FOOTER: {
     TITLE1: "Your Growth Journey",
@@ -207,7 +208,8 @@ const locale = {
       Terms and conditions go here. You can place legal disclaimers,
       repayment policies, or other important information in this section.
     `
-  }
+  },
+  NO_PRODUCTS_FOUND: "No Products Found",
 };
 
 export default locale;

@@ -6,31 +6,21 @@ import { Product } from "@/lib/types";
 import CustomCard from "../ui/custom-card";
 import { useTranslation } from "@/i18n";
 
-// Temporary demo products (move this out to a data file if reused often)
-const products: Product[] = Array.from({ length: 10 }, (_, i) => ({
-  id: String(i + 1),
-  category: "CARS",
-  title: "Amazon.sa",
-  store: "Amazon.sa",
-  price: "1000 SAR",
-  image: `/assets/images/${i == 0 ? "iphone" : i == 1 ? "micro" : "acer"}.png`,
-}));
-
 export default function CustomCarousel({
   title,
+  products = [],
   category,
 }: {
   title: string;
+  products?: Product[];
   category?: string;
 }) {
   const { language, translate } = useTranslation();
   const scrollRef = useRef<HTMLDivElement>(null);
-
   const isEnglish = language.code === "en";
 
   const handleScroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
-
     scrollRef.current.scrollBy({
       left: direction === "left" ? -300 : 300,
       behavior: "smooth",
@@ -74,11 +64,27 @@ export default function CustomCarousel({
         ref={scrollRef}
         className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth px-2 pb-4"
       >
-        {products.map((product) => (
-          <div key={product.id} className="flex-shrink-0 w-[280px]">
-            <CustomCard product={product} carousel category={category} />
-          </div>
-        ))}
+        {products.length > 0 ? (
+          products.map((product: Product) => (
+            <div key={product.id} className="flex-shrink-0 w-[280px]">
+              <CustomCard
+                product={{
+                  id: product.product_id ?? "",
+                  category: product.product_type ?? "",
+                  title_en: product.title_en,
+                  store: "Marketplace",
+                  price: `${product.price} ${product.currency}`,
+                  image:
+                    product.main_image_url ?? "/assets/svgs/placeholder.svg",
+                }}
+                carousel
+                category={category}
+              />
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500">{translate("NO_PRODUCTS_FOUND")}</p>
+        )}
       </div>
     </div>
   );

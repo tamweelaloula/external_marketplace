@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { pokemonApi } from "./services/pokemon";
+import { marketPlaceApi } from "./services/getAllProducts";
 
 export const store = configureStore({
   reducer: {
-    [pokemonApi.reducerPath]: pokemonApi.reducer,
+    [marketPlaceApi.reducerPath]: marketPlaceApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(pokemonApi.middleware),
+    getDefaultMiddleware().concat(marketPlaceApi.middleware),
 });
 
 // Types for TypeScript

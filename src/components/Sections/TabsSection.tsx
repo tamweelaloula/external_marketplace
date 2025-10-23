@@ -5,15 +5,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import VehicleDetails from "./VehicleDetails";
 import { useTranslation } from "@/i18n";
 
-function wrapWithParagraphs(text: string): React.JSX.Element[] {
+function wrapWithParagraphs(text?: string): React.JSX.Element[] {
+  if (!text || typeof text !== "string") return [<p key="0"></p>];
   return text
     .trim()
     .split(/\n\s*\n/)
     .map((line, i) => <p key={i}>{line.trim()}</p>);
 }
 
-export default function ProductTabs() {
-  const { translate } = useTranslation();
+export default function ProductTabs({ data }: { data: any }) {
+  const { translate, language } = useTranslation();
   return (
     <div className="w-full mx-auto py-6 md:py-8">
       <Tabs defaultValue="product" className="w-full">
@@ -97,21 +98,21 @@ export default function ProductTabs() {
           value="product"
           className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4 rtl:text-right"
         >
-          <VehicleDetails />
+          <VehicleDetails data={data?.vehicle} description={data?.[`description_${language.code}`]}/>
         </TabsContent>
 
         <TabsContent
           value="installment"
           className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4 rtl:text-right"
         >
-          {wrapWithParagraphs(translate("TABS.INSTALLMENT_CONTENT"))}
+          {wrapWithParagraphs(data ? data?.[`installment_details_${language.code}`] : "")}
         </TabsContent>
 
         <TabsContent
           value="terms"
           className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4 rtl:text-right"
         >
-          {wrapWithParagraphs(translate("TABS.TERMS_CONTENT"))}
+          {wrapWithParagraphs(data ? data.terms_conditions_en : "")}
         </TabsContent>
       </Tabs>
     </div>
