@@ -11,8 +11,22 @@ export default function HeroSlider() {
 
   const slides = [
     {
-      id: 2,
+      id: 1,
       image: "/assets/svgs/promo-lady.svg",
+      title: translate("TITLE.PROMOTITLE"),
+      description: translate("TITLE.PROMOSUBTITLE"),
+      buttonText: translate("TITLE.PROMOBUTTON"),
+    },
+    {
+      id: 2,
+      image: "/assets/svgs/promo-car.svg",
+      title: translate("TITLE.PROMOTITLE"),
+      description: translate("TITLE.PROMOSUBTITLE"),
+      buttonText: translate("TITLE.PROMOBUTTON"),
+    },
+    {
+      id: 3,
+      image: "/assets/svgs/car-promo.svg",
       title: translate("TITLE.PROMOTITLE"),
       description: translate("TITLE.PROMOSUBTITLE"),
       buttonText: translate("TITLE.PROMOBUTTON"),
@@ -51,59 +65,79 @@ export default function HeroSlider() {
         ref={sliderRef}
         className="flex overflow-x-auto scroll-smooth scrollbar-hide w-full snap-x snap-mandatory"
       >
-        {slides.map((slide) => (
-          <div
-            key={slide.id}
-            className="min-w-full flex flex-col md:flex-row items-center justify-between bg-[#F9C41614] rounded-tl-[100px] rounded-br-[100px] snap-center px-4 sm:px-6 md:px-10 lg:px-12 pb-10 md:pb-0"
-          >
-            {/* Image Section */}
+        {slides.map((slide) => {
+          const isRightEdge = slide.id === 3; // image at right border
+          const isLeftEdge = slide.id === 2; // image at left border
+          const isReversed = slide.id === 3; // reverse layout for right border image
+
+          return (
             <div
-              className={`flex-1 flex mb-6 md:mb-0 ${
-                slide.image.includes("car")
-                  ? "items-end justify-center md:justify-start"
-                  : "justify-center md:justify-center"
+              key={slide.id}
+              className={`min-w-full flex flex-col md:flex-row items-center justify-between bg-[#F9C41614] rounded-tl-[60px] rounded-br-[60px] snap-center px-4 sm:px-6 md:px-10 lg:px-12 pb-10 md:pb-0 ${
+                isReversed ? "md:flex-row-reverse" : ""
               }`}
             >
-              <img
-                src={slide.image}
-                alt={slide.title}
-                className={`max-h-[200px] sm:max-h-[250px] md:max-h-[300px] object-contain ${
-                  slide.image.includes("car") ? "md:-ml-10" : ""
+              {/* Image Section */}
+              <div
+                className={`flex-1 flex mb-6 md:mb-0 ${
+                  isRightEdge
+                    ? "justify-end md:pr-0"
+                    : isLeftEdge
+                    ? "justify-start md:pl-0"
+                    : slide.image.includes("car")
+                    ? "items-end justify-center md:justify-start"
+                    : "justify-center md:justify-center"
                 }`}
-              />
-            </div>
+              >
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className={`max-h-[200px] sm:max-h-[250px] md:max-h-[300px] object-contain ${
+                    isRightEdge
+                      ? "md:mr-[-46px]" // touch right border
+                      : isLeftEdge
+                      ? "md:ml-[-46px]" // touch left border
+                      : ""
+                  }`}
+                />
+              </div>
 
-            {/* Text Section */}
-            <div className="flex-1 text-center md:text-left px-2 sm:px-4 md:px-0">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
-                {slide.title}
-              </h2>
-              <p className="mt-3 text-sm sm:text-base md:text-lg text-gray-600">
-                {slide.description}
-              </p>
-              <Button className="mt-5 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold rounded-full">
-                {slide.buttonText}
-              </Button>
+              {/* Text Section */}
+              <div
+                className={`flex-1 text-center md:text-left px-2 sm:px-4 md:px-0 ${
+                  isReversed ? "md:text-right" : ""
+                }`}
+              >
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
+                  {slide.title}
+                </h2>
+                <p className="mt-3 text-sm sm:text-base md:text-lg text-gray-600">
+                  {slide.description}
+                </p>
+                <Button className="mt-5 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold rounded-full">
+                  {slide.buttonText}
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Progress Indicators */}
-      {/* <div className="absolute left-1/2 -translate-x-1/2 bottom-4 flex gap-2">
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-4 flex gap-2">
         {slides.map((_, idx) => (
           <button
             key={idx}
             onClick={() => goToSlide(idx)}
             className={`transition-all duration-300 rounded-full ${
               idx === current
-                ? "w-20 md:w-52 sm:w-20 h-1 bg-[#F9C416]"
-                : "w-16 md:w-38 sm:w-20 h-1 bg-gray-400/40"
+                ? "w-14 md:w-32 sm:w-20 h-1 bg-[#F9C416]"
+                : "w-10 md:w-18 sm:w-20 h-1 bg-gray-400/40"
             }`}
             aria-label={`Go to slide ${idx + 1}`}
           />
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }

@@ -9,8 +9,13 @@ export interface Category {
 export interface Product {
   id: string;
   category: string;
-  title: string;
+  title_en: string;
   store: string;
   price: string;
   image: string;
+  product_type?: string;
+  product_id?: string;
+  document_ld?: string;
+  main_image_url?: string;
+  currency?: string;
 }
