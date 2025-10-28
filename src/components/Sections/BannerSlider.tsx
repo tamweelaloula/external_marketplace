@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "@/i18n";
 import AnimatedOrbit from "../ui/animation-orbit";
 import AnimatedOrbit2 from "../ui/animation-orbit2";
+import AnimatedOrbit3 from "../ui/animation-orbit3";
 
 const slides = [
   {
@@ -17,19 +18,17 @@ const slides = [
   },
   {
     id: 2,
-    title1: "BANNER.TITLE1",
-    yellowText: "BANNER.YELLOW_TEXT",
-    secondText: "BANNER.SECOND_TEXT",
-    titleEnd: "BANNER.TITLE_END",
-    subtitle: "BANNER.SUBTITLE",
+    title1: "BANNER.TITLE2",
+    yellowText: "BANNER.YELLOW_TEXT2",
+    titleEnd: "BANNER.TITLE_END2",
+    subtitle: "BANNER.SUBTITLE2",
   },
   {
     id: 3,
-    title1: "BANNER.TITLE1",
-    yellowText: "BANNER.YELLOW_TEXT",
-    secondText: "BANNER.SECOND_TEXT",
-    titleEnd: "BANNER.TITLE_END",
-    subtitle: "BANNER.SUBTITLE",
+    title1: "BANNER.TITLE3",
+    yellowText: "BANNER.YELLOW_TEXT3",
+    titleEnd: "BANNER.TITLE_END3",
+    subtitle: "BANNER.SUBTITLE3",
   },
 ];
 
@@ -84,7 +83,7 @@ export default function BannerSlider() {
                       <span className="text-[#F9C416] block sm:inline">
                         {translate(slide.yellowText)}
                       </span>{" "}
-                      <span>{translate(slide.secondText)}</span>{" "}
+                      {slide.secondText && <span>{translate(slide.secondText)}</span>}{" "}
                       <span className="whitespace-nowrap">
                         {translate(slide.titleEnd)}
                       </span>
@@ -96,7 +95,7 @@ export default function BannerSlider() {
 
                   {/* Right - Orbit Illustration */}
                   <div className="flex justify-center">
-                    {slide.id ===1 ? <AnimatedOrbit />:slide.id ===2 ? <AnimatedOrbit2 />:<AnimatedOrbit />}
+                    {slide.id ===1 ? <AnimatedOrbit />:slide.id ===2 ? <AnimatedOrbit2 />: slide.id === 3 ? <AnimatedOrbit3 /> :<AnimatedOrbit />}
                   </div>
                 </div>
               ))}

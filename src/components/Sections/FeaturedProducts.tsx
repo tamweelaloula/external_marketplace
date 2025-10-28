@@ -7,24 +7,28 @@ import Link from "next/link";
 import { useGetAllProductsQuery } from "@/lib/services/getAllProducts";
 import { ProductSkeleton } from "../shared/ProductSkeleton";
 
-// Categories (map to API product_type)
-const categories = [
-  "VEHICLE",
-  "ELECTRONICS",
-  "SCHOOL",
-  "HEALTH",
-  "FURNITURE",
-];
+interface FeaturedProductsProps {
+  categories: {
+    CAT_ID: number;
+    CAT_NAME: string;
+    CAT_NAME_AR: string;
+    STATUS: string;
+  }[];
+}
 
-const FeaturedProducts = () => {
-  const { translate } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState(categories[0]);
+const FeaturedProducts = ({ categories }: FeaturedProductsProps) => {
+  const { translate, language } = useTranslation();
 
-  // Fetch products for the selected category
+  // Set initial category to first item if available
+  const [activeCategory, setActiveCategory] = useState(
+    categories.length > 0 ? categories[0].CAT_ID.toString() : ""
+  );
+
+  // Fetch products for the selected category (mapped to product_type)
   const { data, isFetching, isError } = useGetAllProductsQuery({
     page: 1,
-    limit: 12,
-    product_type: activeCategory,
+    limit: 120,
+    cat_id: activeCategory,
   });
 
   // Extract products list safely
@@ -50,20 +54,23 @@ const FeaturedProducts = () => {
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap gap-4 mb-8">
+        <div className="flex flex-wrap gap-4 mb-8 justify-center sm:justify-start">
           {categories.map((cat) => {
-            const isActive = activeCategory === cat;
+            const isActive = activeCategory === cat.CAT_ID.toString();
+            const label =
+              language.code === "ar" ? cat.CAT_NAME_AR : cat.CAT_NAME;
+
             return (
               <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
+                key={cat.CAT_ID}
+                onClick={() => setActiveCategory(cat.CAT_ID.toString())}
                 className={`text-sm font-medium pb-1 transition ${
                   isActive
                     ? "text-[#F9C416] border-b-2 border-[#F9C416]"
-                    : "text-gray-600 hover:text-primary"
+                    : "text-gray-600 hover:text-[#F9C416]"
                 }`}
               >
-                {translate(`TITLE.${cat}`)}
+                {label}
               </button>
             );
           })}
@@ -100,9 +107,14 @@ const FeaturedProducts = () => {
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500 py-12">
-            {translate("TITLE.NO_PRODUCTS_FOUND")}
-          </p>
+          <div className="col-span-full flex flex-col items-center justify-center py-12 text-center text-gray-500">
+            <img
+              src="/assets/svgs/no-products.svg"
+              alt="No Products Found"
+              className="w-[326px] h-[276px] mb-4 opacity-80"
+            />
+            <p className="text-lg font-medium">{translate("NO_PRODUCTS_FOUND")}</p>
+          </div>
         )}
       </div>
     </section>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import CategoryBanner from "@/components/Sections/CategoryBanner";
 import { categories } from "@/lib/utils";
 import SingleFeaturedProduct from "@/components/Sections/SingleFeaturedProduct";
 
@@ -14,11 +13,11 @@ export default function CategoryDetailPage() {
   return (
     <div className="min-h-screen bg-background py-16">
       {/* Hero Section */}
-      <CategoryBanner title={category === "all" ? "ALL" : title} />
       <SingleFeaturedProduct
         title={title}
         category={category}
         hasFilter
+        hasBannerInside
       />
     </div>
   );

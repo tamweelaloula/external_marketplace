@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import CategoryBanner from "@/components/Sections/CategoryBanner";
 import SingleFeaturedProduct from "@/components/Sections/SingleFeaturedProduct";
 import { useGetProductByIdQuery } from "@/lib/services/getAllProducts";
-import Skeleton from "@/components/shared/Skeleton";
+import Loader from "@/components/shared/Loader";
 
 export default function MerchantDetailPage() {
   const { merchant } = useParams<{ merchant: string }>();
@@ -15,9 +15,11 @@ export default function MerchantDetailPage() {
     isLoading,
     isError,
   } = useGetProductByIdQuery(merchant);
-
+  
   // Extract merchant product info safely
-  const merchantProducts = productData?.data?.products || [];
+  const categories = productData?.data?.categories || {};
+  const merchantProducts: any[] = Object.values(categories).flat(); // now it's an array
+
   const currentMerchant = merchantProducts.find(
     (item: any) => String(item.merchant_id) === String(merchant)
   );
@@ -30,16 +32,7 @@ export default function MerchantDetailPage() {
     return (
       <div className="min-h-screen bg-background py-16 space-y-12">
         {/* Banner Skeleton */}
-        <div className="max-w-6xl mx-auto">
-          <Skeleton height="120px" />
-        </div>
-
-        {/* Featured Products Skeleton */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <Skeleton key={i} height="280px" />
-          ))}
-        </div>
+        <Loader />
       </div>
     );
   }

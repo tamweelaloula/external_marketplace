@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { useParams } from "next/navigation";
 import { Formik, Form } from "formik";
 import { Button } from "@/components/ui/button";
@@ -19,23 +19,20 @@ import {
   useGetRelatedProductsMutation,
 } from "@/lib/services/getAllProducts";
 import Loader from "@/components/shared/Loader";
-import {ProductSkeleton} from "@/components/shared/ProductSkeleton"; // Add skeleton component
 
 export default function DetailPage() {
   const { category } = useParams();
-  const merchantId = "246";
+  const merchantId = "373";
   const { translate } = useTranslation();
 
+  // Local states
   const [showApplyForm, setShowApplyForm] = useState(false);
   const [showLoanScreen, setShowLoanScreen] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
   const applyFormRef = useRef<HTMLDivElement | null>(null);
 
-  const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
-  const [getRelatedProducts, { isLoading: isRelatedLoading }] =
-    useGetRelatedProductsMutation();
-
-  // Fetch main product details
+  // API Hooks
   const {
     data: productData,
     error: productError,
@@ -45,7 +42,6 @@ export default function DetailPage() {
     product_id: category as string,
   });
 
-  // Fetch product images
   const {
     data: imagesData,
     error: imagesError,
@@ -55,32 +51,45 @@ export default function DetailPage() {
     productId: category as string,
   });
 
-  // Fetch related products
-  useEffect(() => {
-    if (category && merchantId) {
-      getRelatedProducts({
-        productId: category,
-        productType: "VEHICLE",
-        merchantId,
-      })
-        .unwrap()
-        .then((res) => setRelatedProducts(res.data?.products || []))
-        .catch((err) => console.error("Failed to fetch related products:", err));
-    }
-  }, [category, merchantId, getRelatedProducts]);
+  const [getRelatedProducts, { isLoading: isRelatedLoading }] =
+    useGetRelatedProductsMutation();
 
+  // Fetch related products once product is available
+  useEffect(() => {
+    if (!category || !merchantId) return;
+    const productId = Array.isArray(category) ? category[0] : category;
+
+    getRelatedProducts({
+      productId,
+      productType: productData?.data?.product_type || "VEHICLE",
+      merchantId,
+    })
+      .unwrap()
+      .then((res) => setRelatedProducts(res.data?.products || []))
+      .catch((err) => console.error("Failed to fetch related products:", err));
+  }, [category, merchantId, getRelatedProducts, productData?.data?.product_type]);
+
+  // Unified loading state (single loader for all)
+  const isLoading =
+    isProductLoading || isImagesLoading || isRelatedLoading;
+
+  // Unified error handling
+  const hasError = productError || imagesError;
+
+  // Scroll to Apply form
   const handleScrollToForm = () => {
     setShowApplyForm(true);
     applyFormRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Loan form submit
   const handleLoanSubmit = () => {
     setShowSuccessModal(true);
   };
 
-  // Overall loading
-  const isLoading = isProductLoading || isImagesLoading;
+  const initialValues = useMemo(() => ({ tenor: "", amount: 0 }), []);
 
+  // Loading UI
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -89,7 +98,8 @@ export default function DetailPage() {
     );
   }
 
-  if (productError || imagesError) {
+  // Error UI
+  if (hasError) {
     return (
       <div className="flex justify-center items-center min-h-screen text-center">
         <div>
@@ -104,38 +114,26 @@ export default function DetailPage() {
     );
   }
 
-  const initialValues = { tenor: "", amount: 0 };
+  const product = productData?.data;
 
   return (
     <div className="min-h-screen bg-background space-y-12 md:space-y-16 px-4 sm:px-6 lg:px-12">
-      {/* Product Details */}
-      {isProductLoading ? (
-        <ProductSkeleton height="400px" />
-      ) : (
-        <ProductDetail
-          productData={productData?.data}
-          onClick={handleScrollToForm}
-          merchantId={merchantId}
-          productId={category as string}
-          imageData={imagesData}
-          isImagesLoading={isImagesLoading}
-          imagesError={imagesError}
-        />
-      )}
+      {/* Product Detail */}
+      <ProductDetail
+        productData={product}
+        onClick={handleScrollToForm}
+        merchantId={merchantId}
+        productId={category as string}
+        imageData={imagesData}
+      />
 
-      {/* Tabs */}
-      {isProductLoading ? (
-        <ProductSkeleton height="200px" />
-      ) : (
-        <ProductTabs data={productData?.data} />
-      )}
+      {/* Tabs Section */}
+      <ProductTabs data={product} />
 
-      {/* Apply Form */}
+      {/* Apply Form Section */}
       <div ref={applyFormRef}>
         {showApplyForm && !showLoanScreen && (
-          <ApplyOnlineForm
-            onHandleFinalSubmit={() => setShowLoanScreen(true)}
-          />
+          <ApplyOnlineForm onHandleFinalSubmit={() => setShowLoanScreen(true)} />
         )}
       </div>
 
@@ -192,9 +190,7 @@ export default function DetailPage() {
       )}
 
       {/* Related Products */}
-      {isRelatedLoading ? (
-        <ProductSkeleton height="250px" />
-      ) : (
+      {relatedProducts.length > 0 && (
         <CustomCarousel
           title="RELATED_PRODUCT"
           category={category as string}
