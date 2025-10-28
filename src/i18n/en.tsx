@@ -9,11 +9,19 @@ const locale = {
   },
   BANNER: {
     TITLE1: "Elevate your",
+    TITLE2: "Smarter",
+    TITLE3: "Drive Your",
     YELLOW_TEXT: "Business",
+    YELLOW_TEXT2: "Shopping",
+    YELLOW_TEXT3: "Dream",
     SECOND_TEXT: "with our",
     TITLE_END: "marketplace services",
+    TITLE_END2: "Starts Here",
+    TITLE_END3: "with Ease",
     SUBTITLE:
       "Expand reach, grow sales, and engage customers with our all-in-one marketplace",
+    SUBTITLE2: "Experience effortless shopping with verified merchants, and transparent, secure transactions.",
+    SUBTITLE3: "Find your perfect car, compare models, and buy confidently with transparent pricing and flexible payment options.",
   },
   CATEGORY_SECTION: {
     SEARCHBAR: "Search Here",
@@ -209,7 +217,7 @@ const locale = {
       repayment policies, or other important information in this section.
     `
   },
-  NO_PRODUCTS_FOUND: "No Products Found",
+  NO_PRODUCTS_FOUND: "Currently, there are no products under this category.",
 };
 
 export default locale;

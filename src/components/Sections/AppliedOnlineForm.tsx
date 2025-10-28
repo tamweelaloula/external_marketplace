@@ -67,7 +67,6 @@ export default function ApplyOnlineForm({
       if (step < 2) {
         setStep((prev) => prev + 1);
       } else {
-        console.log("Final Submit", values);
         setShowSuccessModal(true);
       }
     } else {

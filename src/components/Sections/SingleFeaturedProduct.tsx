@@ -10,17 +10,20 @@ import { ProductSkeleton } from "../shared/ProductSkeleton";
 import { useGetAllProductsQuery } from "@/lib/services/getAllProducts";
 import { useState, useMemo } from "react";
 import { Product } from "@/lib/types";
+import CategoryBanner from "./CategoryBanner";
 
 export default function SingleFeaturedProduct({
   title,
   category,
   hasFilter = false,
   merchantProducts,
+  hasBannerInside = false,
 }: {
   title: string;
   category: string;
   hasFilter?: boolean;
   merchantProducts?: Product[];
+  hasBannerInside?: boolean
 }) {
   const { merchant } = useParams<{ merchant: string }>();
   const { translate } = useTranslation();
@@ -49,14 +52,14 @@ export default function SingleFeaturedProduct({
   const queryParams = useMemo(() => {
     const params: Record<string, any> = {
       page: 1,
-      limit: 12,
+      limit: 120,
       min_price: filters.min_price,
       max_price: filters.max_price,
       sort: filters.sort as "newest" | "price_high" | "price_low",
     };
 
-    if (category !== "all") {
-      params.product_type = category === "cars" ? "VEHICLE" : category;
+    if (category && category !== "all") {
+      params.cat_id = String(category);
     }
 
     if (appliedSearch) {
@@ -74,12 +77,13 @@ export default function SingleFeaturedProduct({
 
   // Use prop data or API data
   const categoriesData = data?.data?.categories || {};
+
   let products =
     merchantProducts && merchantProducts.length > 0
       ? merchantProducts
       : category === "all"
       ? categoriesData
-      : categoriesData[category === "cars" ? "VEHICLE" : category] || [];
+      : categoriesData[category] || [];
 
   // Client-side search filter for merchantProducts
   if (merchantProducts && merchantProducts.length > 0 && appliedSearch) {
@@ -100,6 +104,8 @@ export default function SingleFeaturedProduct({
       (category !== "all" && Array.isArray(products) && products.length === 0));
   
   return (
+    <>
+    {hasBannerInside && <CategoryBanner title={category === "all" ? "ALL" : title} />}
     <section className="py-12 px-4 sm:px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -117,7 +123,7 @@ export default function SingleFeaturedProduct({
           </h2>
 
           <div className="flex items-center gap-2">
-            {hasFilter && category !== "all" && (
+            {hasFilter && category === "1218" && (
               <FilterDialog onApply={setFilters} />
             )}
             <Input
@@ -148,8 +154,13 @@ export default function SingleFeaturedProduct({
 
         {/* Empty */}
         {empty && (
-          <div className="col-span-full text-center text-gray-500">
-            {translate("NO_PRODUCTS_FOUND")}
+          <div className="col-span-full flex flex-col items-center justify-center py-12 text-center text-gray-500">
+            <img
+              src="/assets/svgs/no-products.svg"
+              alt="No Products Found"
+              className="w-32 h-32 mb-4 opacity-80"
+            />
+            <p className="text-lg font-medium">{translate("NO_PRODUCTS_FOUND")}</p>
           </div>
         )}
 
@@ -191,5 +202,6 @@ export default function SingleFeaturedProduct({
         )}
       </div>
     </section>
+    </>
   );
 }

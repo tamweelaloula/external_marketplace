@@ -26,7 +26,7 @@ export default function CustomCarousel({
       behavior: "smooth",
     });
   };
-
+   
   const ScrollButton = ({
     onClick,
     icon: Icon,

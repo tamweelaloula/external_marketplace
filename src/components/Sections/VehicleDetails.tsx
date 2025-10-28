@@ -31,7 +31,7 @@ export default function VehicleDetails({
   return (
     <div className="w-full">
       {/* Title outside card */}
-      {description && (
+      {description && !data && (
         <div className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4 rtl:text-right">
           {description}
         </div>

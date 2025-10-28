@@ -207,7 +207,7 @@ const locale = {
       سياسات السداد، أو أي معلومات هامة أخرى في هذا القسم.
     `
   },
-  NO_PRODUCTS_FOUND: "لا توجد منتجات",
+  NO_PRODUCTS_FOUND: "حاليًا، لا توجد منتجات ضمن هذه الفئة.",
 };
 
 export default locale;
