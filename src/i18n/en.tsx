@@ -25,7 +25,7 @@ const locale = {
   },
   CATEGORY_SECTION: {
     SEARCHBAR: "Search Here",
-    TITLE: "Choose Your Category",
+    TITLE: "Explore Our Categories",
   },
   BUTTON: {
     APPLY: "Apply",

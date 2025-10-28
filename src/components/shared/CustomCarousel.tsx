@@ -46,7 +46,7 @@ export default function CustomCarousel({
     <div className="relative w-full">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">{translate(`TITLE.${title}`)}</h2>
+        <h2 className="text-xl font-semibold">{title}</h2>
         <div className="flex gap-2">
           <ScrollButton
             onClick={() => handleScroll(isEnglish ? "left" : "right")}
