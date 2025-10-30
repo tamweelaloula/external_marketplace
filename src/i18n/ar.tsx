@@ -59,7 +59,7 @@ const locale = {
   },
   CATEGORY_SECTION: {
     SEARCHBAR: "ابحث هنا",
-    TITLE: "اختر فئة عملك",
+    TITLE: "استكشف فئاتنا",
   },
   FOOTER: {
     TITLE1: "رحلة نموك",
