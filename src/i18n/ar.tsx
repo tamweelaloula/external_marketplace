@@ -33,16 +33,16 @@ const locale = {
     JARIR_PRODUCT: "مكتبة جرير - جميع المنتجات",
     RELATED_PRODUCT: "المنتجات ذات الصلة",
     NAQSH: "متجر نقش",
-    CARS: "سيارات",
+    VEHICLE: "سيارات",
     SMARTPHONES: "الهواتف الذكية",
     COMPUTERS: "الحواسيب والأجهزة اللوحية",
     ELECTRONICS: "إلكترونيات",
-    EDUCATION: "تعليم",
+    SCHOOL: "تعليم",
     HEALTH: "صحة",
     FURNITURE: "أثاث",
     DIOR: "ديور",
     SHOW_ALL: "عرض الكل",
-    ALL: "جميع المنتجات",
+    ALL: "استكشف كتالوج المنتجات",
     FILTER: "تصفية",
     PRICE_RANGE: "نطاق السعر",
     SAR: "ر.س",
@@ -54,11 +54,12 @@ const locale = {
     PROMOTITLE: "نمكّن عملك بتمويل مرن",
     PROMOSUBTITLE:
       "نقدّم حلولاً مالية سريعة وموثوقة لمساعدتك على تنمية عملك.",
-    PROMOBUTTON: "اعرف المزيد"
+    PROMOBUTTON: "اعرف المزيد",
+    UNCATEGORIZED: "غير مصنف",
   },
   CATEGORY_SECTION: {
     SEARCHBAR: "ابحث هنا",
-    TITLE: "اختر فئة عملك",
+    TITLE: "استكشف فئاتنا",
   },
   FOOTER: {
     TITLE1: "رحلة نموك",
@@ -205,7 +206,8 @@ const locale = {
       توضع هنا الشروط والأحكام. يمكنك إضافة إخلاءات المسؤولية القانونية،
       سياسات السداد، أو أي معلومات هامة أخرى في هذا القسم.
     `
-  }
+  },
+  NO_PRODUCTS_FOUND: "حاليًا، لا توجد منتجات ضمن هذه الفئة.",
 };
 
 export default locale;

@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "objectstorage.me-jeddah-1.oraclecloud.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

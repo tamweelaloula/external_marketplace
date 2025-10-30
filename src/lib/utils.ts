@@ -19,10 +19,10 @@ export const categories: (Category & { icon: string })[] = [
     path: "/electronics",
     icon: "/assets/svgs/camera.svg",
   },
-  { id: "cars", label: "CARS", path: "/cars", icon: "/assets/svgs/cars.svg" },
+  { id: "cars", label: "VEHICLE", path: "/cars", icon: "/assets/svgs/cars.svg" },
   {
     id: "education",
-    label: "EDUCATION",
+    label: "SCHOOL",
     path: "/education",
     icon: "/assets/svgs/education.svg",
   },

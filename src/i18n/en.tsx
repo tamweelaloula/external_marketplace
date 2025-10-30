@@ -9,15 +9,23 @@ const locale = {
   },
   BANNER: {
     TITLE1: "Elevate your",
+    TITLE2: "Smarter",
+    TITLE3: "Drive Your",
     YELLOW_TEXT: "Business",
+    YELLOW_TEXT2: "Shopping",
+    YELLOW_TEXT3: "Dream",
     SECOND_TEXT: "with our",
     TITLE_END: "marketplace services",
+    TITLE_END2: "Starts Here",
+    TITLE_END3: "with Ease",
     SUBTITLE:
       "Expand reach, grow sales, and engage customers with our all-in-one marketplace",
+    SUBTITLE2: "Experience effortless shopping with verified merchants, and transparent, secure transactions.",
+    SUBTITLE3: "Find your perfect car, compare models, and buy confidently with transparent pricing and flexible payment options.",
   },
   CATEGORY_SECTION: {
     SEARCHBAR: "Search Here",
-    TITLE: "Choose Your Category",
+    TITLE: "Explore Our Categories",
   },
   BUTTON: {
     APPLY: "Apply",
@@ -34,16 +42,16 @@ const locale = {
     APPLY_ONLINE: "Apply Online",
     FILL_FORM: "Kindly fill out the form below to continue",
     SHOW_ALL: "Show All",
-    ALL: "All Products",
+    ALL: "Explore product catalogue",
     FEATURED_PRODUCTS: "Featured Products",
     JARIR_PRODUCT: "Jarir Bookstore - All Products",
     RELATED_PRODUCT: "Related Products",
     NAQSH: "Naqsh Store",
     SMARTPHONES: "Smartphones",
     COMPUTERS: "Computers & Tablets",
-    CARS: "Cars",
+    VEHICLE: "Cars",
     ELECTRONICS: "Electronics",
-    EDUCATION: "Education",
+    SCHOOL: "Education",
     HEALTH: "Health",
     FURNITURE: "Furniture",
     DIOR: "DIOR",
@@ -59,6 +67,7 @@ const locale = {
     PROMOSUBTITLE:
       "We provide quick and reliable financial solutions to help your business grow.",
     PROMOBUTTON: "Learn More",
+    UNCATEGORIZED: "Uncategorized",
   },
   FOOTER: {
     TITLE1: "Your Growth Journey",
@@ -207,7 +216,8 @@ const locale = {
       Terms and conditions go here. You can place legal disclaimers,
       repayment policies, or other important information in this section.
     `
-  }
+  },
+  NO_PRODUCTS_FOUND: "Currently, there are no products under this category.",
 };
 
 export default locale;

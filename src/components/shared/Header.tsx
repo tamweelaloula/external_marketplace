@@ -18,7 +18,11 @@ const Header = ({ onLogin }: { onLogin: () => void }) => {
   const navLinks = [
     { href: "/", label: translate("NAV.HOME") },
     { href: "/categories/all", label: translate("NAV.PRODUCTS") },
-    { href: "/for-merchant", label: translate("NAV.FOR_MERCHANT") },
+    {
+      href: "https://merchants.tamweel-aloula.com",
+      label: translate("NAV.FOR_MERCHANT"),
+      external: true,
+    },
   ];
 
   return (
@@ -32,27 +36,41 @@ const Header = ({ onLogin }: { onLogin: () => void }) => {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[#212044] hover:text-[#F9C416] font-medium transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#212044] hover:text-[#F9C416] font-medium transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-[#212044] hover:text-[#F9C416] font-medium transition-colors"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </nav>
 
           {/* Right side actions */}
           <div className="flex items-center gap-2">
             <LanguageDropdown />
             <div className="hidden md:flex gap-2">
-              <Link
-                href={"https://merchants.tamweel-aloula.com/"}
+              <a
+                href="https://merchants.tamweel-aloula.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-[#F9C416] hover:bg-[#ffd342] border-none text-[#212044] font-semibold py-2 px-2 md:px-6 rounded-full"
               >
                 {translate("NAV.PARTNER")}
-              </Link>
+              </a>
             </div>
 
             {/* Mobile Hamburger using shadcn Sheet */}
@@ -77,24 +95,36 @@ const Header = ({ onLogin }: { onLogin: () => void }) => {
                 </SheetHeader>
 
                 <nav className="flex flex-col gap-4 mt-6">
-                  {navLinks.map((link) => (
-                    <SheetClose asChild key={link.href}>
-                      <Link
+                  {navLinks.map((link) =>
+                    link.external ? (
+                      <a
+                        key={link.href}
                         href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-[#212044] hover:text-[#F9C416] font-medium transition-colors"
                       >
                         {link.label}
-                      </Link>
-                    </SheetClose>
-                  ))}
-                  <SheetClose asChild>
-                    <Link
-                      href={"https://merchants.tamweel-aloula.com/"}
-                      className="bg-[#F9C416] hover:bg-[#ffd342] border-none text-[#212044] text-center font-semibold py-2 px-2 md:px-6 rounded-full"
-                    >
-                      {translate("NAV.PARTNER")}
-                    </Link>
-                  </SheetClose>
+                      </a>
+                    ) : (
+                      <SheetClose asChild key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="text-[#212044] hover:text-[#F9C416] font-medium transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      </SheetClose>
+                    )
+                  )}
+                  <a
+                    href="https://merchants.tamweel-aloula.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#F9C416] hover:bg-[#ffd342] border-none text-[#212044] text-center font-semibold py-2 px-2 md:px-6 rounded-full"
+                  >
+                    {translate("NAV.PARTNER")}
+                  </a>
                 </nav>
               </SheetContent>
             </Sheet>
