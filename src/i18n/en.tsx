@@ -218,6 +218,10 @@ const locale = {
     `
   },
   NO_PRODUCTS_FOUND: "Currently, there are no products under this category.",
+  ERROR: {
+    FAILED_TO_LOAD: "Failed to load data.",
+    TRY_AGAIN_LATER: "Please try again later."
+  }
 };
 
 export default locale;

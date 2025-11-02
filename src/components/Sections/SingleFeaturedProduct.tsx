@@ -83,7 +83,9 @@ export default function SingleFeaturedProduct({
     queryParams,
     { skip: skipApi }
   );
-  const { data: categories, isLoading: categoriesLoading } =
+
+  // default fallback to prevent undefined
+  const { data: categories = { data: [] }, isLoading: categoriesLoading } =
     useGetCategoriesQuery(null);
 
   /** --------------------------
@@ -172,9 +174,7 @@ export default function SingleFeaturedProduct({
         alt="No Products Found"
         className="w-32 h-32 mb-4 opacity-80"
       />
-      <p className="text-lg font-medium">
-        {translate("NO_PRODUCTS_FOUND")}
-      </p>
+      <p className="text-lg font-medium">{translate("NO_PRODUCTS_FOUND")}</p>
     </div>
   );
 
@@ -184,7 +184,7 @@ export default function SingleFeaturedProduct({
         <div key={catName} className="gap-25 mt-20">
           <CustomCarousel
             title={
-              categories.data?.find(
+              categories?.data?.find(
                 (cat: any) => String(cat.CAT_ID) === catName
               )?.CAT_NAME || catName
             }
@@ -226,7 +226,7 @@ export default function SingleFeaturedProduct({
           title={
             category === "all"
               ? "ALL"
-              : categories.data?.find(
+              : categories?.data?.find(
                   (cat: any) => String(cat.CAT_ID) === category
                 )?.CAT_NAME || category
           }
