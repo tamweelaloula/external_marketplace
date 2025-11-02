@@ -85,7 +85,7 @@ const FeaturedProducts = ({ categories }: FeaturedProductsProps) => {
           </div>
         ) : isError ? (
           <p className="text-center text-red-500 py-12">
-            {translate("TITLE.FAILED_TO_LOAD")}
+            {translate("ERROR.FAILED_TO_LOAD")}
           </p>
         ) : products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 py-12">

@@ -46,7 +46,7 @@ export default function CustomCarousel({
     <div className="relative w-full">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">{title}</h2>
+        <h2 className="text-xl font-semibold">{title === "RELATED_PRODUCT"? translate(`TITLE.${title}`) : title}</h2>
         <div className="flex gap-2">
           <ScrollButton
             onClick={() => handleScroll(isEnglish ? "left" : "right")}
@@ -71,7 +71,7 @@ export default function CustomCarousel({
                 product={{
                   id: product.product_id ?? "",
                   category: product.product_type ?? "",
-                  title_en: product.title_en,
+                  title_en: product[`title_${language.code}`] || product.title_en,
                   store: "Marketplace",
                   price: `${product.price} ${product.currency}`,
                   image:

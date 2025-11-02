@@ -208,6 +208,10 @@ const locale = {
     `
   },
   NO_PRODUCTS_FOUND: "حاليًا، لا توجد منتجات ضمن هذه الفئة.",
+  ERROR: {
+    FAILED_TO_LOAD: "فشل في تحميل البيانات.",
+    TRY_AGAIN_LATER: "يرجى المحاولة مرة أخرى لاحقًا."
+  }
 };
 
 export default locale;
