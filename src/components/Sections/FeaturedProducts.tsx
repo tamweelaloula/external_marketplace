@@ -95,7 +95,7 @@ const FeaturedProducts = ({ categories }: FeaturedProductsProps) => {
                   product={{
                     id: product.product_id,
                     category: product.product_type,
-                    title_en: product.title_en,
+                    title_en: product?.[`title_${language.code}`],
                     store: "Marketplace",
                     price: `${product.price} ${product.currency}`,
                     image:

@@ -23,13 +23,17 @@ const Categories = ({ categories }: CategoriesProps) => {
         <div className="flex flex-wrap justify-center gap-8">
           {categories.map((category) => (
             <Link
-              href={`/categories/${category.CAT_ID == "97889466"? "all" : category.CAT_ID}`}
+              href={`/categories/${
+                category.CAT_ID == "97889466" ? "all" : category.CAT_ID
+              }`}
               key={category.CAT_ID}
               className="group flex flex-col items-center cursor-pointer transition-all duration-300"
             >
-              <div className="w-24 h-24 flex items-center justify-center bg-white rounded-full shadow-md transition-all duration-300 group-hover:bg-[#FFF9E9] group-hover:text-[#F9C416]">
+              <div className="w-24 h-24 flex items-center justify-center bg-white rounded-full shadow-[0_0_25px_0_hsla(196,68%,15%,0.08)] transition-all duration-300 group-hover:bg-[#FFF9E9] group-hover:text-[#F9C416]">
                 <img
-                  src={`/assets/svgs/category-${category.CAT_NAME}.svg`}
+                  src={`/assets/svgs/category-${
+                    category.CAT_NAME === "Others" ? "all" : category.CAT_NAME
+                  }.svg`}
                   alt={category.CAT_NAME}
                   className="w-10 h-10 transition-all duration-300 group-hover:brightness-110"
                   onError={(e) =>

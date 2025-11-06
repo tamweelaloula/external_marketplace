@@ -112,7 +112,7 @@ export default function ProductTabs({ data }: { data: any }) {
           value="terms"
           className="mt-6 text-gray-700 text-sm md:text-base leading-relaxed space-y-4 rtl:text-right"
         >
-          {wrapWithParagraphs(data ? data.terms_conditions_en : "")}
+          {wrapWithParagraphs(data ? data?.[`terms_conditions_${language.code}`] : "")}
         </TabsContent>
       </Tabs>
     </div>

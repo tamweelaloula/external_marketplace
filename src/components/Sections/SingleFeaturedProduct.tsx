@@ -34,7 +34,7 @@ export default function SingleFeaturedProduct({
   hasBannerInside = false,
 }: Props) {
   const { merchant } = useParams<{ merchant: string }>();
-  const { translate } = useTranslation();
+  const { translate, language } = useTranslation();
 
   /** --------------------------
    * State Management
@@ -50,8 +50,15 @@ export default function SingleFeaturedProduct({
   /** --------------------------
    * Event Handlers
    * -------------------------- */
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearchTerm(e.target.value);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    // Automatically show all products when search is cleared
+    if (value.trim() === "") {
+      setAppliedSearch("");
+    }
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") setAppliedSearch(searchTerm.trim());
@@ -186,7 +193,8 @@ export default function SingleFeaturedProduct({
             title={
               categories?.data?.find(
                 (cat: any) => String(cat.CAT_ID) === catName
-              )?.CAT_NAME || catName
+              )?.[language.code === "en" ? "CAT_NAME" : "CAT_NAME_AR"] ||
+              catName
             }
             category={merchant}
             products={catProducts as Product[]}
@@ -203,7 +211,7 @@ export default function SingleFeaturedProduct({
             product={{
               id: product.product_id || product.id,
               category: product.product_type || product.category,
-              title_en: product.title_en,
+              title_en: product?.[`title_${language.code}`],
               store: "Marketplace",
               price: `${product.price} ${product.currency || ""}`,
               image: product.main_image_url || "/assets/svgs/placeholder.svg",
@@ -233,8 +241,8 @@ export default function SingleFeaturedProduct({
         />
       )}
 
-      <section className="py-12 px-4 sm:px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           {renderHeader()}
           {loading && renderLoading()}
           {error && renderError()}

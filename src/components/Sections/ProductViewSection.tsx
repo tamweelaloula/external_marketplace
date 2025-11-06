@@ -14,11 +14,13 @@ interface merchantDetails {
 
 interface productData {
   description_en: any;
+  description_ar: any;
   title_en: string;
+  title_ar: string;
   price: number;
   productId: string;
   currency: string;
-  merchant: merchantDetails
+  merchant: merchantDetails;
 }
 
 interface ProductDetailProps {
@@ -47,19 +49,20 @@ const replaceOracleUrl = (url: string) => {
 };
 
 export default function ProductDetail(props: ProductDetailProps) {
-  const { translate } = useTranslation();
+  const { translate, language } = useTranslation();
   const [current, setCurrent] = useState(0);
 
-  const { imageData, isImagesLoading, imagesError, onClick, productData } = props;
+  const { imageData, isImagesLoading, imagesError, onClick, productData } =
+    props;
 
   const images = useMemo(() => {
     if (imageData?.data?.length) {
       return imageData.data.map((img: any) => replaceOracleUrl(img.url));
     }
     return [
-      "/assets/images/car.png",
-      "/assets/images/car2.png",
-      "/assets/images/car3.png",
+      "/assets/svgs/placeholder.svg",
+      "/assets/svgs/placeholder.svg",
+      "/assets/svgs/placeholder.svg",
     ];
   }, [imageData]);
 
@@ -159,11 +162,11 @@ export default function ProductDetail(props: ProductDetailProps) {
           {/* Right - Product Info */}
           <div className="flex flex-col gap-5 md:mt-10">
             <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900">
-              {productData?.title_en ?? ""}
+              {productData?.[`title_${language.code}`] ?? ""}
             </h2>
 
             <p className="text-sm md:text-base lg:text-lg text-gray-600 max-w-xl">
-              {productData?.description_en ?? ""}
+              {productData?.[`description_${language.code}`] ?? ""}
             </p>
 
             <span className="text-lg md:text-2xl font-bold text-gray-900">

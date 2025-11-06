@@ -26,7 +26,7 @@ export default function CustomCard({
           : `/categories/${product.id}/details`
       }
       key={product.id}
-      className="bg-white w-full rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 cursor-pointer flex flex-col"
+      className="bg-white w-full rounded-lg duration-300 p-5 cursor-pointer flex flex-col shadow-[0_0_25px_0_hsla(196,68%,15%,0.08)]"
     >
       {/* Image Wrapper */}
       <div className="relative w-full aspect-[16/9] mb-4 rounded overflow-hidden">

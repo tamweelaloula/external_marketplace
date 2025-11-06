@@ -27,7 +27,7 @@ const Header = ({ onLogin }: { onLogin: () => void }) => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-      <div className="container mx-auto px-4 py-4">
+      <div className="max-w-[1440px] mx-auto px-8 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center space-x-3 cursor-pointer">

@@ -18,13 +18,13 @@ export default function AnimatedOrbit2() {
       "
     >
       {/* Computer */}
-      <div className="relative z-10">
+      <div className="absolute z-10 right-0 bottom-18">
         <Image
           src="/assets/svgs/banner-car.svg"
           alt="Computer"
-          width={761}
-          height={641}
-          className="w-[261px] sm:w-[461px] md:w-[461px] lg:w-[461px] xl:w-[461px]"
+          width={461}
+          height={341}
+          className="w-[461px] sm:w-[461px] md:w-[661px] lg:w-[661px] xl:w-[661px]"
         />
       </div>
     </div>
