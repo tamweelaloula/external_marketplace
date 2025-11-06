@@ -62,7 +62,7 @@ export default function CustomCarousel({
       {/* Carousel */}
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth px-2 pb-4"
+        className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth px-8 py-5 pb-4"
       >
         {products.length > 0 ? (
           products.map((product: Product) => (
@@ -78,6 +78,7 @@ export default function CustomCarousel({
                     product.main_image_url ?? "/assets/svgs/placeholder.svg",
                 }}
                 carousel
+                brand
                 category={category}
               />
             </div>

@@ -56,6 +56,10 @@ const locale = {
       "نقدّم حلولاً مالية سريعة وموثوقة لمساعدتك على تنمية عملك.",
     PROMOBUTTON: "اعرف المزيد",
     UNCATEGORIZED: "غير مصنف",
+    CARS_CAT_SUBTITLE: "اكتشف تشكيلتنا الواسعة من السيارات",
+    EDUCATIONAL_CAT_SUBTITLE: "تمكين رحلتك التعليمية",
+    MEDICAL_CAT_SUBTITLE: "اجعل صحتك أولوية بسهولة",
+    ALL_CAT_SUBTITLE: "اكتشف مجموعة واسعة من المنتجات المصممة لتلبية احتياجاتك.",
   },
   CATEGORY_SECTION: {
     SEARCHBAR: "ابحث هنا",
