@@ -56,6 +56,10 @@ const locale = {
       "نقدّم حلولاً مالية سريعة وموثوقة لمساعدتك على تنمية عملك.",
     PROMOBUTTON: "اعرف المزيد",
     UNCATEGORIZED: "غير مصنف",
+    CARS_CAT_SUBTITLE: "اكتشف تشكيلتنا الواسعة من السيارات",
+    EDUCATIONAL_CAT_SUBTITLE: "تمكين رحلتك التعليمية",
+    MEDICAL_CAT_SUBTITLE: "اجعل صحتك أولوية بسهولة",
+    ALL_CAT_SUBTITLE: "اكتشف مجموعة واسعة من المنتجات المصممة لتلبية احتياجاتك.",
   },
   CATEGORY_SECTION: {
     SEARCHBAR: "ابحث هنا",
@@ -208,6 +212,10 @@ const locale = {
     `
   },
   NO_PRODUCTS_FOUND: "حاليًا، لا توجد منتجات ضمن هذه الفئة.",
+  ERROR: {
+    FAILED_TO_LOAD: "فشل في تحميل البيانات.",
+    TRY_AGAIN_LATER: "يرجى المحاولة مرة أخرى لاحقًا."
+  }
 };
 
 export default locale;

@@ -9,7 +9,8 @@ export interface Category {
 export interface Product {
   id: string;
   category: string;
-  title_en: string;
+  title_en?: string;
+  title_ar?: string;
   store: string;
   price: string;
   image: string;

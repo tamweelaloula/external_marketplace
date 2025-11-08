@@ -42,7 +42,7 @@ const locale = {
     APPLY_ONLINE: "Apply Online",
     FILL_FORM: "Kindly fill out the form below to continue",
     SHOW_ALL: "Show All",
-    ALL: "Explore product catalogue",
+    ALL: "Explore Product Catalogue",
     FEATURED_PRODUCTS: "Featured Products",
     JARIR_PRODUCT: "Jarir Bookstore - All Products",
     RELATED_PRODUCT: "Related Products",
@@ -68,6 +68,10 @@ const locale = {
       "We provide quick and reliable financial solutions to help your business grow.",
     PROMOBUTTON: "Learn More",
     UNCATEGORIZED: "Uncategorized",
+    CARS_CAT_SUBTITLE: "Drive Your Dreams Forward",
+    EDUCATIONAL_CAT_SUBTITLE: "Empower Your Learning Journey",
+    MEDICAL_CAT_SUBTITLE: "Prioritize Your Health with Ease",
+    ALL_CAT_SUBTITLE: "Discover a wide range of products tailored to your needs.",
   },
   FOOTER: {
     TITLE1: "Your Growth Journey",
@@ -218,6 +222,10 @@ const locale = {
     `
   },
   NO_PRODUCTS_FOUND: "Currently, there are no products under this category.",
+  ERROR: {
+    FAILED_TO_LOAD: "Failed to load data.",
+    TRY_AGAIN_LATER: "Please try again later."
+  }
 };
 
 export default locale;

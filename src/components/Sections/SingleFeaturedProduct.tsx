@@ -34,7 +34,7 @@ export default function SingleFeaturedProduct({
   hasBannerInside = false,
 }: Props) {
   const { merchant } = useParams<{ merchant: string }>();
-  const { translate } = useTranslation();
+  const { translate, language } = useTranslation();
 
   /** --------------------------
    * State Management
@@ -50,8 +50,15 @@ export default function SingleFeaturedProduct({
   /** --------------------------
    * Event Handlers
    * -------------------------- */
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearchTerm(e.target.value);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    // Automatically show all products when search is cleared
+    if (value.trim() === "") {
+      setAppliedSearch("");
+    }
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") setAppliedSearch(searchTerm.trim());
@@ -83,7 +90,9 @@ export default function SingleFeaturedProduct({
     queryParams,
     { skip: skipApi }
   );
-  const { data: categories, isLoading: categoriesLoading } =
+
+  // default fallback to prevent undefined
+  const { data: categories = { data: [] }, isLoading: categoriesLoading } =
     useGetCategoriesQuery(null);
 
   /** --------------------------
@@ -172,9 +181,7 @@ export default function SingleFeaturedProduct({
         alt="No Products Found"
         className="w-32 h-32 mb-4 opacity-80"
       />
-      <p className="text-lg font-medium">
-        {translate("NO_PRODUCTS_FOUND")}
-      </p>
+      <p className="text-lg font-medium">{translate("NO_PRODUCTS_FOUND")}</p>
     </div>
   );
 
@@ -184,9 +191,10 @@ export default function SingleFeaturedProduct({
         <div key={catName} className="gap-25 mt-20">
           <CustomCarousel
             title={
-              categories.data?.find(
+              categories?.data?.find(
                 (cat: any) => String(cat.CAT_ID) === catName
-              )?.CAT_NAME || catName
+              )?.[language.code === "en" ? "CAT_NAME" : "CAT_NAME_AR"] ||
+              catName
             }
             category={merchant}
             products={catProducts as Product[]}
@@ -203,7 +211,7 @@ export default function SingleFeaturedProduct({
             product={{
               id: product.product_id || product.id,
               category: product.product_type || product.category,
-              title_en: product.title_en,
+              title_en: product?.[`title_${language.code}`],
               store: "Marketplace",
               price: `${product.price} ${product.currency || ""}`,
               image: product.main_image_url || "/assets/svgs/placeholder.svg",
@@ -226,15 +234,15 @@ export default function SingleFeaturedProduct({
           title={
             category === "all"
               ? "ALL"
-              : categories.data?.find(
+              : categories?.data?.find(
                   (cat: any) => String(cat.CAT_ID) === category
                 )?.CAT_NAME || category
           }
         />
       )}
 
-      <section className="py-12 px-4 sm:px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           {renderHeader()}
           {loading && renderLoading()}
           {error && renderError()}
