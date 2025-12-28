@@ -41,7 +41,7 @@ export default function SingleFeaturedProduct({
    * -------------------------- */
   const [filters, setFilters] = useState({
     min_price: 100,
-    max_price: 115000,
+    max_price: 500000,
     sort: "newest",
   });
   const [searchTerm, setSearchTerm] = useState("");

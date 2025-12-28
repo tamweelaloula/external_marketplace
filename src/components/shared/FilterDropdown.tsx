@@ -22,7 +22,7 @@ type FilterDropdownProps = {
 };
 
 export default function FilterDropdown({ onApply }: FilterDropdownProps) {
-  const [range, setRange] = React.useState([100, 115000]);
+  const [range, setRange] = React.useState([100, 500000]);
   const [sort, setSort] = React.useState("newest");
   const { translate } = useTranslation();
 
@@ -71,7 +71,7 @@ export default function FilterDropdown({ onApply }: FilterDropdownProps) {
           <Slider
             value={range}
             onValueChange={setRange}
-            max={115000}
+            max={500000}
             min={100}
             step={50}
             className="
