@@ -17,10 +17,10 @@ export default function FormikFieldRadio({ title, name, value, required }: formi
       </label>
       <div className="flex gap-4">
         <label className="flex items-center gap-2 text-sm w-[138px] p-2 border-1 border-gray-300 rounded-md">
-          <Field type="radio" name={name} value="yes" className="text-yellow-400" /> {translate("INPUTTITLE.YES")}
+          <Field type="radio" name={name} value="Y" className="text-yellow-400" /> {translate("INPUTTITLE.YES")}
         </label>
         <label className="flex items-center gap-2 text-sm w-[138px] p-2 border-1 border-gray-300 rounded-md">
-          <Field type="radio" name={name} value="no" className="text-yellow-400" /> {translate("INPUTTITLE.NO")}
+          <Field type="radio" name={name} value="N" className="text-yellow-400" /> {translate("INPUTTITLE.NO")}
         </label>
       </div>
     </div>
