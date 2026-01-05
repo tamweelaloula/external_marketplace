@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,15 +13,20 @@ import { useTranslation } from "@/i18n";
 
 export default function NafathVerificationModal({
   isOpen,
+  code,
+  isLoading,
+  isVerificationComplete,
   onClose,
-  onNextStep
+  onNextStep,
 }: {
   isOpen: boolean;
+  code: string;
+  isLoading?: boolean;
+  isVerificationComplete?: boolean;
   onClose: () => void;
-  onNextStep: ()=> void
+  onNextStep: () => void;
 }) {
-  const {translate} = useTranslation()
-  const [loading, setLoading] = useState(false);
+  const { translate } = useTranslation();
   return (
     <Dialog open={isOpen}>
       <DialogContent
@@ -37,7 +41,7 @@ export default function NafathVerificationModal({
           <X className="h-5 w-5 text-gray-500" />
         </button>
 
-        {loading ? (
+        {isVerificationComplete ? (
           <>
             <Loader />
             <div className="text-2xl font-bold text-[#1F1F1F] my-3">
@@ -66,7 +70,9 @@ export default function NafathVerificationModal({
             </DialogHeader>
 
             {/* Verification Number */}
-            <div className="text-5xl font-bold text-yellow-500 my-3">56</div>
+            <div className="text-5xl font-bold text-yellow-500 my-3">
+              {code}
+            </div>
 
             {/* Buttons */}
             <div className="flex justify-center gap-6">
@@ -80,15 +86,12 @@ export default function NafathVerificationModal({
               <Button
                 className="rounded-full width-[225] px-6 py-2 bg-yellow-400 hover:bg-yellow-500 text-white font-medium"
                 onClick={() => {
-                  setLoading(true);
-                  setTimeout(() => {
-                    onClose();
-                    onNextStep()
-                    setLoading(false)
-                  }, 5000);
+                  // setLoading(true);
+                  alert("Asda");
+                  onNextStep();
                 }}
               >
-                {translate("BUTTON.PROCEED")}
+                {isLoading ? "Loading..." : translate("BUTTON.PROCEED")}
               </Button>
             </div>
           </>

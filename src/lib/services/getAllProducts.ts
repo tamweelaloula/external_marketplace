@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL_SIT
+
 type GetAllProductsParams = {
   page?: number;
   limit?: number;
@@ -14,7 +16,7 @@ type GetAllProductsParams = {
 export const marketPlaceApi = createApi({
   reducerPath: "marketPlaceApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api-mob-sit.tamweel-aloula.com/market-place/v1",
+    baseUrl: BASE_URL,
   }),
   endpoints: (builder) => ({
     /** =====================
@@ -84,7 +86,7 @@ export const marketPlaceApi = createApi({
   }),
 });
 
-// ✅ Export all hooks
+// Export all hooks
 export const {
   useGetAllProductsQuery,
   useGetProductDocumentQuery,
@@ -92,5 +94,5 @@ export const {
   useGetProductDetailQuery,
   useGetRelatedProductsMutation,
   useGetProductByIdQuery,
-  useGetCategoriesQuery, // ✅ new hook for categories
+  useGetCategoriesQuery, // new hook for categories
 } = marketPlaceApi;

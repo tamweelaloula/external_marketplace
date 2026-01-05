@@ -1,4 +1,5 @@
 import FormikField from "@/components/shared/FormikFieldInput";
+import FormikCalendar from "@/components/ui/FormikCalender";
 import { useTranslation } from "@/i18n";
 
 export default function BasicInfoForm() {
@@ -13,13 +14,13 @@ export default function BasicInfoForm() {
         type="text"
         placeholder="Enter your National ID / Iqama Number"
       />
-      <FormikField
-        title={translate("INPUTTITLE.DOB")}
+      
+      <FormikCalendar
         name="dob"
+        label="Date of Birth"
         required
-        type="date"
-        placeholder="Enter your National ID / Iqama Number"
       />
+      
       <FormikField
         title={translate("INPUTTITLE.PHONE")}
         name="phone"

@@ -61,6 +61,9 @@ export const validationSchemas = (translate: any) => [
     transport: Yup.string().required(translate("VALIDATION.TRANSPORT_REQUIRED")),
     insurance: Yup.string().required(translate("VALIDATION.INSURANCE_REQUIRED")),
     future: Yup.string().required(translate("VALIDATION.FUTURE_REQUIRED")),
+    tenure: Yup.string().required(translate("VALIDATION.TENOR_REQUIRED")),
+    requestedAmount: Yup.string().required(translate("VALIDATION.REQUESTED_AMOUNT_REQUIRED")),
+    balloonAmount: Yup.string().required(translate("VALIDATION.BALLOON_AMOUNT_REQUIRED")),
     total: Yup.string().required(translate("VALIDATION.TOTAL_REQUIRED")),
   }),
 ];
