@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL_SIT
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
 
 type GetAllProductsParams = {
   page?: number;

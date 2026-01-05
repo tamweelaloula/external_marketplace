@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL_SIT + "/lookup/";
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL + "/lookup/";
 
 export const lookupApi = createApi({
   reducerPath: "lookupApi",
