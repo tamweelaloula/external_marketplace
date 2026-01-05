@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { convertToHijri, formatDateToDDMMYYYY, normalizeDob } from "@/lib/utils";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL_SIT
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
 
 export const nafathApi = createApi({
   reducerPath: "nafathApi",
