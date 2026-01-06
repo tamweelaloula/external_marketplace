@@ -10,13 +10,20 @@ export const validationSchemas = (translate: any) => [
   Yup.object({
     nationalId: Yup.string()
       .matches(/^[0-9]+$/, translate("VALIDATION.ONLY_NUMBERS"))
+      .matches(/^[12]/, translate("VALIDATION.MUST_START_WITH_1_OR_2"))
       .min(10, translate("VALIDATION.MUST_BE_10_DIGITS"))
       .required(translate("VALIDATION.NATIONAL_ID_REQUIRED")),
     dob: Yup.date().required(translate("VALIDATION.DOB_REQUIRED")),
     phone: Yup.string()
       .matches(/^966[0-9]{8,10}$/, translate("VALIDATION.PHONE_FORMAT"))
       .required(translate("VALIDATION.PHONE_REQUIRED")),
-    email: Yup.string().email(translate("VALIDATION.INVALID_EMAIL")).nullable(),
+    email: Yup.string()
+      .email(translate("VALIDATION.INVALID_EMAIL"))
+      .matches(
+        /^[a-zA-Z0-9._%+-]+@gmail\.com$/,
+        translate("VALIDATION.INVALID_GMAIL")
+      )
+      .required(translate("VALIDATION.EMAIL_REQUIRED")),
   }),
 
   // Step 2 validation
@@ -61,9 +68,12 @@ export const validationSchemas = (translate: any) => [
     transport: Yup.string().required(translate("VALIDATION.TRANSPORT_REQUIRED")),
     insurance: Yup.string().required(translate("VALIDATION.INSURANCE_REQUIRED")),
     future: Yup.string().required(translate("VALIDATION.FUTURE_REQUIRED")),
-    tenure: Yup.string().required(translate("VALIDATION.TENOR_REQUIRED")),
+  }),
+
+  //step 4 validation
+  Yup.object({
     requestedAmount: Yup.string().required(translate("VALIDATION.REQUESTED_AMOUNT_REQUIRED")),
     balloonAmount: Yup.string().required(translate("VALIDATION.BALLOON_AMOUNT_REQUIRED")),
-    total: Yup.string().required(translate("VALIDATION.TOTAL_REQUIRED")),
-  }),
+    tenure: Yup.string().required(translate("VALIDATION.TENOR_REQUIRED")),
+  })
 ];

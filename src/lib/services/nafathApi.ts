@@ -194,7 +194,7 @@ export const nafathApi = createApi({
         const payload: any = {
           id,
           idNumber: values?.nationalId,
-          idType: "NID",
+          idType: values?.nationalId?.slice(0, 1) == "1" ? "NID" : "Q", //if starts with 1 then NID, if 2 then
           source: "MARKETPLACE",
           sessionId: merchantData?.sessionId,
           sessionToken: merchantData?.sessionToken,

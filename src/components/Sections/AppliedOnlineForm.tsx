@@ -17,6 +17,7 @@ import BasicInfoForm from "./Forms/BasicInfoForm";
 import AddressDetailForm from "./Forms/AddressDetailForm";
 import NafathVerificationForm from "./Forms/NafathVerificationForm";
 import LoanDetails from "./Forms/LoanDetails";
+import { useGetConditionQuery } from "@/lib/services/lookupApi";
 
 const checked = "/assets/svgs/checked-step.svg";
 const done = "/assets/svgs/done-step.svg";
@@ -27,6 +28,7 @@ const done = "/assets/svgs/done-step.svg";
 interface ApplyOnlineFormProps {
   merchantId: string;
   product: any;
+  onSubmitted: () => void
 }
 
 interface FormValues {
@@ -114,9 +116,21 @@ const INITIAL_VALUES: FormValues = {
 export default function ApplyOnlineForm({
   merchantId,
   product,
+  onSubmitted
 }: ApplyOnlineFormProps) {
   const { translate } = useTranslation();
   const { toast } = useToast();
+  const {
+    formData,
+    updateForm,
+    step,
+    setStep,
+    setApplId,
+    applId,
+    showNafathModal,
+    setShowNafathModal,
+    setAssetId
+  } = useContext(FormContext);
 
   const [successModal, setSuccessModal] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
@@ -127,19 +141,8 @@ export default function ApplyOnlineForm({
 
   const showSuccess = (message: string) =>
     toast({ title: message, type: "success" });
-
-  const showInfo = (message: string) => toast({ title: message });
-
-  const {
-    formData,
-    updateForm,
-    step,
-    setStep,
-    setApplId,
-    applId,
-    showNafathModal,
-    setShowNafathModal,
-  } = useContext(FormContext);
+  const { data: assetDetails } = useGetConditionQuery({ modelId: product?.vehicle?.model, modelTypeId: product?.vehicle?.model_type })
+  setAssetId(assetDetails?.data[0].ASSETID)
 
   const {
     verificationLoading,
@@ -169,11 +172,6 @@ export default function ApplyOnlineForm({
       });
 
       if (res?.success) {
-        toast({
-          title: translate("VALIDATION.REQUEST_SENT"),
-          description: translate("VALIDATION.APPROVE_FROM_APP"),
-        });
-
         setVerificationCode(res.data?.random);
         setShowNafathModal(true);
         return;
@@ -222,7 +220,7 @@ export default function ApplyOnlineForm({
 
       case 3: {
         try {
-          
+
           const res = await handleSubmitApplication({
             formValues: values,
             product,
@@ -239,11 +237,11 @@ export default function ApplyOnlineForm({
             showError(translate("VALIDATION.SUBMITTED_FAILED"));
           }
         } catch (error) {
-          if((error as any)?.data?.message)
+          if ((error as any)?.data?.message)
             showSuccess(
               (error as any)?.data?.message || translate("COMMON.GENERIC_ERROR")
             );
-          else 
+          else
             showError(translate("COMMON.GENERIC_ERROR"));
         }
         break;
@@ -255,7 +253,7 @@ export default function ApplyOnlineForm({
     values: FormValues,
     helpers: FormikHelpers<FormValues>
   ) => {
-    const { setSubmitting, validateForm, setTouched } = helpers;
+    const { setSubmitting, validateForm, setTouched, resetForm } = helpers;
 
     const errors = await validateForm();
     if (Object.keys(errors).length) {
@@ -269,12 +267,21 @@ export default function ApplyOnlineForm({
     }
 
     await handleSubmitByStep(values);
+
+    // Reset form only after final submission (step 3)
+    if (step === 3) {
+      resetForm();
+      setStep(0);
+      setShowNafathModal(false);
+      setSuccessModal(false);
+      setIvrModal(false);
+      onSubmitted()
+    }
+
     setSubmitting(false);
   };
 
   const handleNafathNext = async () => {
-    toast({ title: translate("VALIDATION.CHECKING_STATUS") });
-
     const res = await checkNafathStatus({
       nationalId: formData.nationalId,
       phone: formData.phone,
@@ -349,7 +356,6 @@ export default function ApplyOnlineForm({
         onClose={() => setIvrModal(false)}
         sendIvr={async () => {
           const res = await handleSendIvr(applId);
-          console.log("IVR Response:", res);
           if (res?.success) {
             showSuccess(translate("IVR.SENT_SUCCESS"));
             setIvrModal(false);
@@ -399,27 +405,65 @@ const Actions = ({
   verificationLoading: boolean;
   translate: (k: string) => string;
   onBack: () => void;
-}) => (
-  <div className="flex justify-end gap-4">
-    {step > 0 && (
-      <button
-        type="button"
-        onClick={onBack}
-        className="px-8 py-2 rounded-full border border-yellow-500"
-      >
-        {translate("BUTTON.BACK")}
-      </button>
-    )}
+}) => {
+  const isLoading = isSubmitting || verificationLoading;
 
-    <button
-      type="submit"
-      disabled={isSubmitting || verificationLoading}
-      className="px-8 py-2 rounded-full bg-yellow-500"
-    >
-      {step < 2 ? translate("BUTTON.NEXT") : translate("BUTTON.SUBMIT")}
-    </button>
-  </div>
-);
+  return (
+    <div className="flex justify-end gap-4">
+      {step > 0 && (
+        <button
+          type="button"
+          onClick={onBack}
+          disabled={isLoading}
+          className="px-8 py-2 rounded-full border border-yellow-500 disabled:opacity-50"
+        >
+          {translate("BUTTON.BACK")}
+        </button>
+      )}
+
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="px-8 py-2 rounded-full bg-yellow-500 flex items-center justify-center gap-2 disabled:opacity-70"
+      >
+        {isLoading ? (
+          <>
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              />
+            </svg>
+            <span>
+              {step < 2
+                ? translate("COMMON.LOADING")
+                : translate("COMMON.SUBMITTING")}
+            </span>
+          </>
+        ) : (
+          step < 2
+            ? translate("BUTTON.NEXT")
+            : translate("BUTTON.SUBMIT")
+        )}
+      </button>
+    </div>
+  );
+};
+
 
 function Steps({ step }: { step: number }) {
   return (

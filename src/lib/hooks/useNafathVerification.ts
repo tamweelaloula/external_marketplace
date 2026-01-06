@@ -47,6 +47,7 @@ export const useNafathVerification = () => {
     merchantData,
     setMerchantData,
     setStep,
+    assetId,
     sessionId,
     setSessionId,
     setShowNafathModal,
@@ -264,7 +265,7 @@ export const useNafathVerification = () => {
       product,
       id: idbUsrId,
       categoryId: "1218",
-      assetId: "0",
+      assetId: assetId,
     }).unwrap();
 
   const handleSendIvr = async (appId: string) =>

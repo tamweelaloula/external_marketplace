@@ -13,6 +13,7 @@ import {
   useGetResidentialStatusQuery,
   useGetRelatedPartiesQuery,
 } from "@/lib/services/lookupApi";
+import FormikCalendar from "@/components/ui/FormikCalender";
 
 export default function NafathVarificationForm({ values }: { values: any }) {
   const { translate } = useTranslation();
@@ -84,11 +85,10 @@ export default function NafathVarificationForm({ values }: { values: any }) {
         optionLabelKey="OCCUPATIONNAME"
       />
 
-      <FormikField
-        title={translate("INPUTTITLE.JOINING_DATE")}
+      <FormikCalendar
+        label={translate("INPUTTITLE.JOINING_DATE")}
         name="joiningDate"
         required
-        type="date"
         placeholder="Enter your joining date"
       />
 
