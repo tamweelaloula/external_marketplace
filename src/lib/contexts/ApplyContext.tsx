@@ -16,6 +16,8 @@ interface FormContextType {
   setMerchantData: React.Dispatch<React.SetStateAction<any>>;
   showNafathModal: boolean;
   setShowNafathModal: React.Dispatch<React.SetStateAction<boolean>>;
+  assetId: string;
+  setAssetId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // Default value
@@ -31,7 +33,9 @@ export const FormContext = createContext<FormContextType>({
   merchantData: "",
   setMerchantData: () => { },
   showNafathModal: false,
-  setShowNafathModal: () => {}
+  setShowNafathModal: () => {},
+  assetId : "", 
+  setAssetId: () => {}
 });
 
 export const FormProvider = ({ children }: { children: React.ReactNode }) => {
@@ -42,14 +46,14 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
   const [merchantData, setMerchantData] = useState<any>(null);
   const [logo, setLogo] = useState<string | null>(null);
   const [showNafathModal, setShowNafathModal] = useState(false);
-  
+  const [assetId, setAssetId] = useState("")
 
   const updateForm = (newData: Record<string, any>) => {
     setFormData((prev) => ({ ...prev, ...newData }));
   };
 
   return (
-    <FormContext.Provider value={{ formData, updateForm, step, setStep, applId, setApplId, setSessionId, sessionId, merchantData, setMerchantData, showNafathModal, setShowNafathModal,  }}>
+    <FormContext.Provider value={{ formData, updateForm, step, setStep, applId, setApplId, setSessionId, sessionId, merchantData, setMerchantData, showNafathModal, setShowNafathModal, assetId, setAssetId  }}>
       {children}
     </FormContext.Provider>
   );

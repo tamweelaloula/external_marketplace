@@ -193,6 +193,15 @@ const locale = {
     VERIFICATION_FAILED: "فشل التحقق. يرجى المحاولة مرة أخرى.",
     SUBMITTED_SUCCESS: "تم تقديم طلبك بنجاح.",
     INITIATING: "جاري البدء...",
+    MUST_START_WITH_1_OR_2: "يجب أن يبدأ بـ 1 أو 2",
+    REQUESTED_AMOUNT_REQUIRED: "الدفعة المقدمة مطلوبة.",
+    BALLOON_AMOUNT_REQUIRED: "مبلغ الدفعة النهائية مطلوب.",
+    INVALID_GMAIL: "يرجى إدخال بريد Gmail صحيح",
+    EMAIL_REQUIRED: "البريد الإلكتروني مطلوب",
+    CHECKING_STATUS: "جاري التحقق من الحالة",
+    VERIFIED: "تم التحقق",
+    REQUEST_SENT: "تم إرسال الطلب",
+    APPROVE_FROM_APP: "يرجى الموافقة من التطبيق"
   },
   TABS: {
     VEHICLE_DETAILS: "تفاصيل المركبة",
@@ -232,7 +241,13 @@ const locale = {
   },
   COMMON: {
     GENERIC_ERROR: "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    LOADING: "جاري التحميل...",
+    SUBMITTING: "جاري تقديم الطلب..."
   },
+  IVR: {
+    SENT_SUCCESS: "تم إرسال الاتصال الصوتي بنجاح.",
+    SENT_FAILED: "فشل إرسال الاتصال الصوتي. يرجى المحاولة مرة أخرى.",
+  }
 };
 
 export default locale;

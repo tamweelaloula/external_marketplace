@@ -119,9 +119,9 @@ export default function DetailPage() {
       {/* Apply Form Section */}
       <div ref={applyFormRef}>
         {showApplyForm && !showLoanScreen && (
-          <ApplyOnlineForm product={product} merchantId={productData?.data?.merchant?.id} />
+          <ApplyOnlineForm product={product} merchantId={productData?.data?.merchant?.id} onSubmitted={() => { setShowSuccessModal(true) }} />
         )}
-      </div>   
+      </div>
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (

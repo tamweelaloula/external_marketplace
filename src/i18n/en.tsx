@@ -209,6 +209,15 @@ const locale = {
     SUBMITTED_SUCCESS: "Your application has been submitted successfully.",
     SUBMITTED_FAILED: "Application submission failed. Please try again.",
     INITIATING: "Initiating...",
+    MUST_START_WITH_1_OR_2: "Must start with 1 or 2",
+    REQUESTED_AMOUNT_REQUIRED: "Down payment is required.",
+    BALLOON_AMOUNT_REQUIRED: "Balloon amount is required.",
+    INVALID_GMAIL: "Please enter a valid Gmail address",
+    EMAIL_REQUIRED: "Email is required",
+    CHECKING_STATUS: "Checking Status",
+    VERIFIED: "Verified",
+    REQUEST_SENT: "Request sent",
+    APPROVE_FROM_APP: "Approve from app"
   },
   TABS: {
     VEHICLE_DETAILS: "Vehicle Details",
@@ -248,6 +257,8 @@ const locale = {
   },
   COMMON: {
     GENERIC_ERROR: "Something went wrong. Please try again.",
+    LOADING: "Loading...",
+    SUBMITTING: "Submitting..."
   },
   IVR:{
     SENT_SUCCESS: "IVR has been sent successfully.",
