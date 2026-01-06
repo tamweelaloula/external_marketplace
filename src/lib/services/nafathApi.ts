@@ -212,7 +212,6 @@ export const nafathApi = createApi({
             assetId: isVehicle ? values?.assetId : undefined,
             assetModelYear: isVehicle ? data?.vehicle?.model_year : undefined,
             colorId: isVehicle ? data?.vehicle?.color : undefined,
-            dealerId: isVehicle ? data?.merchant?.id : undefined,
             assetPrice: isVehicle ? data?.price : undefined,
             ballonPayment: isVehicle ? values?.ballonPayment : undefined
           }
