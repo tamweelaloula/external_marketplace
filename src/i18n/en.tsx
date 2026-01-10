@@ -20,8 +20,10 @@ const locale = {
     TITLE_END3: "with Ease",
     SUBTITLE:
       "Expand reach, grow sales, and engage customers with our all-in-one marketplace",
-    SUBTITLE2: "Experience effortless shopping with verified merchants, and transparent, secure transactions.",
-    SUBTITLE3: "Find your perfect car, compare models, and buy confidently with transparent pricing and flexible payment options.",
+    SUBTITLE2:
+      "Experience effortless shopping with verified merchants, and transparent, secure transactions.",
+    SUBTITLE3:
+      "Find your perfect car, compare models, and buy confidently with transparent pricing and flexible payment options.",
   },
   CATEGORY_SECTION: {
     SEARCHBAR: "Search Here",
@@ -71,7 +73,8 @@ const locale = {
     CARS_CAT_SUBTITLE: "Drive Your Dreams Forward",
     EDUCATIONAL_CAT_SUBTITLE: "Empower Your Learning Journey",
     MEDICAL_CAT_SUBTITLE: "Prioritize Your Health with Ease",
-    ALL_CAT_SUBTITLE: "Discover a wide range of products tailored to your needs.",
+    ALL_CAT_SUBTITLE:
+      "Discover a wide range of products tailored to your needs.",
   },
   FOOTER: {
     TITLE1: "Your Growth Journey",
@@ -144,6 +147,15 @@ const locale = {
     ENTER_DETAILS: "Kindly enter the loan details",
     TENOR: "Tenor",
     AMOUNT: "Amount",
+    BALLON_AMOUNT: "Ballon Amount",
+    DOWN_PAYMENT: "Down Payment",
+    IVR_HEADING: "Verify Your Application",
+    IVR_DESC:
+      "Please answer the IVR call you’ll receive shortly to verify and accept your application.",
+    APPLICATION_ACCEPTED: "Application Submitted Successfully",
+    APPLICATION_DESC:
+      "Your application was submitted successfully. Thank you for applying with us.",
+    RE_ENTER_FORM: "Re-Enter the Form",
   },
   APPLICATION: {
     SUBMITTED: "Your Application is Submitted",
@@ -189,6 +201,23 @@ const locale = {
     INSURANCE_REQUIRED: "Insurance Expenses is required",
     FUTURE_REQUIRED: "Any Expected future Expenses is required",
     TOTAL_REQUIRED: "Total Expenses is required",
+    ALREADY_REGISTERED:
+      "You are already registered. Redirecting to your application.",
+    VERIFICATION_STARTED: "Nafath verification has been initiated.",
+    VERIFICATION_SUCCESS: "Verification completed successfully.",
+    VERIFICATION_FAILED: "Verification failed. Please try again.",
+    SUBMITTED_SUCCESS: "Your application has been submitted successfully.",
+    SUBMITTED_FAILED: "Application submission failed. Please try again.",
+    INITIATING: "Initiating...",
+    MUST_START_WITH_1_OR_2: "Must start with 1 or 2",
+    REQUESTED_AMOUNT_REQUIRED: "Down payment is required.",
+    BALLOON_AMOUNT_REQUIRED: "Balloon amount is required.",
+    INVALID_GMAIL: "Please enter a valid Gmail address",
+    EMAIL_REQUIRED: "Email is required",
+    CHECKING_STATUS: "Checking Status",
+    VERIFIED: "Verified",
+    REQUEST_SENT: "Request sent",
+    APPROVE_FROM_APP: "Approve from app"
   },
   TABS: {
     VEHICLE_DETAILS: "Vehicle Details",
@@ -219,12 +248,21 @@ const locale = {
     TERMS_CONTENT: `
       Terms and conditions go here. You can place legal disclaimers,
       repayment policies, or other important information in this section.
-    `
+    `,
   },
   NO_PRODUCTS_FOUND: "Currently, there are no products under this category.",
   ERROR: {
     FAILED_TO_LOAD: "Failed to load data.",
-    TRY_AGAIN_LATER: "Please try again later."
+    TRY_AGAIN_LATER: "Please try again later.",
+  },
+  COMMON: {
+    GENERIC_ERROR: "Something went wrong. Please try again.",
+    LOADING: "Loading...",
+    SUBMITTING: "Submitting..."
+  },
+  IVR:{
+    SENT_SUCCESS: "IVR has been sent successfully.",
+    SENT_FAILED: "Failed to send IVR. Please try again.",
   }
 };
 

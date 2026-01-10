@@ -2,16 +2,11 @@
 
 import { useRef, useState, useEffect, useMemo } from "react";
 import { useParams } from "next/navigation";
-import { Formik, Form } from "formik";
-import { Button } from "@/components/ui/button";
 import ApplyOnlineForm from "@/components/Sections/AppliedOnlineForm";
 import ProductDetail from "@/components/Sections/ProductViewSection";
 import ProductTabs from "@/components/Sections/TabsSection";
 import CustomCarousel from "@/components/shared/CustomCarousel";
-import FormikField from "@/components/shared/FormikFieldInput";
-import FormikFieldSelect from "@/components/shared/FormikFieldSelect";
 import SuccessModal from "@/components/shared/SuccessModal";
-import { loanDetails } from "@/lib/schemas";
 import { useTranslation } from "@/i18n";
 import {
   useGetProductDetailQuery,
@@ -24,7 +19,6 @@ export default function DetailPage() {
   const { category } = useParams();
   const merchantId = "373";
   const { translate } = useTranslation();
-
   // Local states
   const [showApplyForm, setShowApplyForm] = useState(false);
   const [showLoanScreen, setShowLoanScreen] = useState(false);
@@ -82,13 +76,6 @@ export default function DetailPage() {
     applyFormRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Loan form submit
-  const handleLoanSubmit = () => {
-    setShowSuccessModal(true);
-  };
-
-  const initialValues = useMemo(() => ({ tenor: "", amount: 0 }), []);
-
   // Loading UI
   if (isLoading) {
     return (
@@ -129,65 +116,12 @@ export default function DetailPage() {
 
       {/* Tabs Section */}
       <ProductTabs data={product} />
-
       {/* Apply Form Section */}
       <div ref={applyFormRef}>
         {showApplyForm && !showLoanScreen && (
-          <ApplyOnlineForm onHandleFinalSubmit={() => setShowLoanScreen(true)} />
+          <ApplyOnlineForm product={product} merchantId={productData?.data?.merchant?.id} onSubmitted={() => { setShowSuccessModal(true) }} />
         )}
       </div>
-
-      {/* Loan Form */}
-      {showLoanScreen && (
-        <>
-          <div className="text-start mb-8 md:mb-10">
-            <h1 className="text-xl md:text-2xl font-bold text-gray-800">
-              {translate("LOAN.DETAILS")}
-            </h1>
-            <p className="text-sm md:text-base text-gray-500 mt-2">
-              {translate("LOAN.ENTER_DETAILS")}
-            </p>
-          </div>
-
-          <Formik
-            initialValues={initialValues}
-            validationSchema={loanDetails}
-            onSubmit={handleLoanSubmit}
-          >
-            {({ isSubmitting }) => (
-              <Form>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  <FormikFieldSelect
-                    options={["1", "2", "3", "4"]}
-                    value="1"
-                    title={translate("LOAN.TENOR")}
-                    name="tenor"
-                    required
-                  />
-                  <FormikField
-                    type="number"
-                    placeholder="500"
-                    title={translate("LOAN.AMOUNT")}
-                    required
-                    name="amount"
-                  />
-                </div>
-                <div className="flex justify-end">
-                  <Button
-                    className="rounded-full w-full sm:w-auto px-6 py-2 bg-yellow-400 hover:bg-yellow-500 text-black font-medium"
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting
-                      ? translate("BUTTON.SUBMITTING")
-                      : translate("BUTTON.APPLY")}
-                  </Button>
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </>
-      )}
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (

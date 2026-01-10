@@ -52,14 +52,14 @@ const locale = {
     NEWEST: "الأحدث",
     IPHONESMARTPHONE: "آيفون - الهواتف الذكية",
     PROMOTITLE: "نمكّن عملك بتمويل مرن",
-    PROMOSUBTITLE:
-      "نقدّم حلولاً مالية سريعة وموثوقة لمساعدتك على تنمية عملك.",
+    PROMOSUBTITLE: "نقدّم حلولاً مالية سريعة وموثوقة لمساعدتك على تنمية عملك.",
     PROMOBUTTON: "اعرف المزيد",
     UNCATEGORIZED: "غير مصنف",
     CARS_CAT_SUBTITLE: "اكتشف تشكيلتنا الواسعة من السيارات",
     EDUCATIONAL_CAT_SUBTITLE: "تمكين رحلتك التعليمية",
     MEDICAL_CAT_SUBTITLE: "اجعل صحتك أولوية بسهولة",
-    ALL_CAT_SUBTITLE: "اكتشف مجموعة واسعة من المنتجات المصممة لتلبية احتياجاتك.",
+    ALL_CAT_SUBTITLE:
+      "اكتشف مجموعة واسعة من المنتجات المصممة لتلبية احتياجاتك.",
   },
   CATEGORY_SECTION: {
     SEARCHBAR: "ابحث هنا",
@@ -135,6 +135,14 @@ const locale = {
     ENTER_DETAILS: "يرجى إدخال تفاصيل القرض",
     TENOR: "مدة السداد",
     AMOUNT: "المبلغ",
+    BALLON_AMOUNT: "مبلغ البالون",
+    DOWN_PAYMENT: "الدفعة المقدمة",
+    IVR_HEADING: "تحقق من طلبك",
+    IVR_DESC:
+      "يرجى الرد على المكالمة التلقائية التي ستصل إليك قريبًا للتحقق من طلبك وقبوله.",
+    APPLICATION_ACCEPTED: "تم تقديم الطلب بنجاح",
+    APPLICATION_DESC: "تم تقديم طلبك بنجاح. شكرًا لتقديم طلبك معنا.",
+    RE_ENTER_FORM: "أعد إدخال النموذج",
   },
   APPLICATION: {
     SUBMITTED: "تم تقديم طلبك",
@@ -179,6 +187,21 @@ const locale = {
     INSURANCE_REQUIRED: "مصاريف التأمين مطلوبة",
     FUTURE_REQUIRED: "أي مصاريف مستقبلية متوقعة مطلوبة",
     TOTAL_REQUIRED: "إجمالي المصاريف مطلوب",
+    ALREADY_REGISTERED: "أنت مسجل بالفعل. يتم تحويلك إلى طلبك.",
+    VERIFICATION_STARTED: "تم بدء التحقق عبر نفاذ.",
+    VERIFICATION_SUCCESS: "تم التحقق بنجاح.",
+    VERIFICATION_FAILED: "فشل التحقق. يرجى المحاولة مرة أخرى.",
+    SUBMITTED_SUCCESS: "تم تقديم طلبك بنجاح.",
+    INITIATING: "جاري البدء...",
+    MUST_START_WITH_1_OR_2: "يجب أن يبدأ بـ 1 أو 2",
+    REQUESTED_AMOUNT_REQUIRED: "الدفعة المقدمة مطلوبة.",
+    BALLOON_AMOUNT_REQUIRED: "مبلغ الدفعة النهائية مطلوب.",
+    INVALID_GMAIL: "يرجى إدخال بريد Gmail صحيح",
+    EMAIL_REQUIRED: "البريد الإلكتروني مطلوب",
+    CHECKING_STATUS: "جاري التحقق من الحالة",
+    VERIFIED: "تم التحقق",
+    REQUEST_SENT: "تم إرسال الطلب",
+    APPROVE_FROM_APP: "يرجى الموافقة من التطبيق"
   },
   TABS: {
     VEHICLE_DETAILS: "تفاصيل المركبة",
@@ -209,12 +232,21 @@ const locale = {
     TERMS_CONTENT: `
       توضع هنا الشروط والأحكام. يمكنك إضافة إخلاءات المسؤولية القانونية،
       سياسات السداد، أو أي معلومات هامة أخرى في هذا القسم.
-    `
+    `,
   },
   NO_PRODUCTS_FOUND: "حاليًا، لا توجد منتجات ضمن هذه الفئة.",
   ERROR: {
     FAILED_TO_LOAD: "فشل في تحميل البيانات.",
-    TRY_AGAIN_LATER: "يرجى المحاولة مرة أخرى لاحقًا."
+    TRY_AGAIN_LATER: "يرجى المحاولة مرة أخرى لاحقًا.",
+  },
+  COMMON: {
+    GENERIC_ERROR: "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    LOADING: "جاري التحميل...",
+    SUBMITTING: "جاري تقديم الطلب..."
+  },
+  IVR: {
+    SENT_SUCCESS: "تم إرسال الاتصال الصوتي بنجاح.",
+    SENT_FAILED: "فشل إرسال الاتصال الصوتي. يرجى المحاولة مرة أخرى.",
   }
 };
 
